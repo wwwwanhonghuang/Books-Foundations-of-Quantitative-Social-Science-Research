@@ -1,0 +1,357 @@
+\section{Case Studies: Research Schemes in Practice}
+
+This section presents real-world examples of canonical research schemes, illustrating how dimensional configurations are realized in actual studies. Each case study identifies the research question, dimensional configuration, key design features, and main findings, demonstrating how abstract design principles translate into concrete empirical work.
+
+\subsection{Randomized Controlled Trials}
+
+\subsubsection{Case Study 1: Moving to Opportunity Experiment}
+
+\paragraph{Research Question.} Does moving from high-poverty to low-poverty neighborhoods improve economic and health outcomes for families?
+
+\paragraph{Background.} The Moving to Opportunity (MTO) experiment, conducted by the U.S. Department of Housing and Urban Development from 1994-1998, examined whether residential mobility could improve outcomes for families living in public housing in high-poverty neighborhoods.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Experimental (researchers controlled housing voucher assignment)
+    \item \textbf{Assignment}: Randomized (lottery-based assignment to three groups)
+    \item \textbf{Temporal}: Longitudinal (followed families for 10-15 years)
+    \item \textbf{Unit tracking}: Panel (same families tracked over time)
+    \item \textbf{Directionality}: Prospective (voucher assignment preceded outcome measurement)
+    \item \textbf{Comparison}: Between-unit (experimental vs. control groups)
+    \item \textbf{Data provenance}: Mixed (baseline surveys, administrative records, follow-up surveys)
+    \item \textbf{Measurement}: Administrative records (earnings, education), surveys (health, well-being), direct assessment (children's achievement tests)
+    \item \textbf{Confounding control}: Randomization-based
+\end{itemize}
+
+\paragraph{Key Design Features.}
+\begin{itemize}
+    \item 4,604 low-income families with children randomized to: (1) experimental voucher (must move to low-poverty area), (2) Section 8 voucher (no location restriction), or (3) control (no voucher)
+    \item Compliance issues: Not all families assigned vouchers used them; not all experimental group families moved to low-poverty areas
+    \item Long-term follow-up enabled assessment of effects on children who were young at randomization
+\end{itemize}
+
+\paragraph{Key Findings.} Moving to lower-poverty neighborhoods produced mixed results: improved mental health and subjective well-being for adults, reduced obesity and diabetes, but little effect on economic self-sufficiency. For children, effects depended critically on age at move: children who moved before age 13 had substantially higher earnings as adults, while those who moved as adolescents showed no earnings gains.
+
+\paragraph{Lessons.} This case illustrates: (1) the power of randomization to answer causal questions that would be confounded in observational studies (families who voluntarily move differ from those who don't), (2) the importance of long-term follow-up for outcomes that take years to manifest, (3) compliance challenges even in experimental designs, and (4) the value of examining heterogeneous treatment effects by subgroup (age at move).
+
+\subsubsection{Case Study 2: Oregon Health Insurance Experiment}
+
+\paragraph{Research Question.} What is the causal effect of health insurance coverage on health outcomes and healthcare utilization?
+
+\paragraph{Background.} In 2008, Oregon expanded its Medicaid program through a lottery due to budget constraints, creating a rare opportunity for a randomized evaluation of health insurance.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Experimental (lottery-based selection for Medicaid)
+    \item \textbf{Assignment}: Randomized (lottery determined eligibility)
+    \item \textbf{Temporal}: Longitudinal (baseline and follow-up measurements)
+    \item \textbf{Comparison}: Between-unit (lottery winners vs. losers)
+    \item \textbf{Data provenance}: Mixed (administrative hospital records, credit reports, in-person health assessments, surveys)
+    \item \textbf{Measurement}: Biomarkers (blood pressure, cholesterol, blood sugar), administrative records (hospital visits, credit), self-report (health status, access)
+    \item \textbf{Confounding control}: Randomization via lottery
+\end{itemize}
+
+\paragraph{Key Findings.} Medicaid coverage increased healthcare utilization, reduced financial strain (fewer medical debts), and improved self-reported health and mental health. However, no statistically significant effects were detected on measured physical health outcomes (blood pressure, cholesterol, glycated hemoglobin) after two years, though confidence intervals included clinically meaningful effects.
+
+\paragraph{Lessons.} Natural policy variation can create experimental opportunities. Biomarker measurement provided objective health assessment beyond self-report. The null findings on some outcomes were scientifically valuable, demonstrating that causal effects may differ from observational associations.
+
+\subsection{Quasi-Experimental Designs}
+
+\subsubsection{Case Study 3: Minimum Wage and Employment (Card \& Krueger)}
+
+\paragraph{Research Question.} Does raising the minimum wage reduce employment, as predicted by standard economic theory?
+
+\paragraph{Background.} In 1992, New Jersey raised its minimum wage from \$4.25 to \$5.05 while neighboring Pennsylvania's minimum wage remained unchanged, creating a natural experiment.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Quasi-experimental (policy change not controlled by researchers)
+    \item \textbf{Assignment}: Natural (state-level policy determined exposure)
+    \item \textbf{Temporal}: Longitudinal (before and after wage increase)
+    \item \textbf{Comparison}: Between-unit (NJ vs. PA) and within-unit (same restaurants before/after)
+    \item \textbf{Data provenance}: Primary (telephone surveys of fast-food restaurants)
+    \item \textbf{Confounding control}: Design-based (difference-in-differences)
+\end{itemize}
+
+\paragraph{Key Design Features.}
+\begin{itemize}
+    \item Difference-in-differences design: compared change in employment in NJ (treatment) to change in PA (control)
+    \item Parallel trends assumption: NJ and PA would have followed similar employment trends absent the wage increase
+    \item Focus on fast-food industry where minimum wage workers are concentrated
+\end{itemize}
+
+\paragraph{Key Findings.} Contrary to standard predictions, employment in NJ fast-food restaurants increased slightly relative to PA following the wage increase. No evidence that minimum wage increase reduced employment.
+
+\paragraph{Lessons.} Natural policy variation can enable causal inference when randomization is impossible. DiD design controls for state-specific time-invariant factors and common time trends. Geographic comparison units (neighboring states) increase plausibility of parallel trends. Findings challenged conventional wisdom and sparked extensive methodological and substantive debate.
+
+\subsubsection{Case Study 4: Class Size and Achievement (Angrist \& Lavy, RDD)}
+
+\paragraph{Research Question.} Does reducing class size improve student achievement?
+
+\paragraph{Background.} Israeli schools follow a rule limiting class size to 40 students (Maimonides' rule). When enrollment exceeds 40, schools must create two classes, creating sharp discontinuities in class size at enrollment thresholds (40, 80, 120, etc.).
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Quasi-experimental (rule-based class assignment)
+    \item \textbf{Assignment}: Rule-based (deterministic function of enrollment)
+    \item \textbf{Temporal}: Cross-sectional (single year of data)
+    \item \textbf{Comparison}: Between-unit (students just above vs. just below thresholds)
+    \item \textbf{Data provenance}: Secondary (administrative school records)
+    \item \textbf{Measurement}: Administrative test scores
+    \item \textbf{Confounding control}: Design-based (regression discontinuity)
+\end{itemize}
+
+\paragraph{Key Design Features.}
+\begin{itemize}
+    \item Discontinuity design: students in schools just above threshold (e.g., 41 students → two classes of ~20) compared to just below (e.g., 40 students → one class of 40)
+    \item Local comparison: estimates class size effect for students near enrollment thresholds
+    \item Continuity assumption: student characteristics smooth across threshold
+\end{itemize}
+
+\paragraph{Key Findings.} Reducing class size from 40 to 20-25 students improved test scores, particularly in reading. Effects larger for disadvantaged students.
+
+\paragraph{Lessons.} Institutional rules create quasi-random variation exploitable for causal inference. RDD provides highly credible local causal estimates but limited generalizability beyond threshold region. Administrative data enable large-scale analysis at low cost.
+
+\subsubsection{Case Study 5: Military Service and Earnings (Angrist, IV Design)}
+
+\paragraph{Research Question.} What is the effect of military service on subsequent civilian earnings?
+
+\paragraph{Background.} During the Vietnam War, draft eligibility was determined by a lottery based on birth date, creating exogenous variation in military service.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Quasi-experimental (draft lottery)
+    \item \textbf{Assignment}: Randomized instrument (lottery) but not randomized treatment (service)
+    \item \textbf{Temporal}: Longitudinal (lottery in 1970s, earnings observed in 1980s)
+    \item \textbf{Comparison}: Between-unit (high vs. low lottery numbers)
+    \item \textbf{Data provenance}: Secondary (Social Security earnings records)
+    \item \textbf{Confounding control}: Design-based (instrumental variables)
+\end{itemize}
+
+\paragraph{Key Design Features.}
+\begin{itemize}
+    \item Draft lottery as instrument: randomly assigned lottery number strongly predicts military service but should not directly affect earnings
+    \item Estimates local average treatment effect (LATE) for compliers: men induced to serve by the draft
+    \item Does not estimate effect for volunteers or those who would avoid service regardless of draft
+\end{itemize}
+
+\paragraph{Key Findings.} Military service reduced subsequent civilian earnings by about 15\% for white veterans. Effects concentrated among those who served in combat and those who would have attended college absent the draft.
+
+\paragraph{Lessons.} IV designs exploit random or as-if random instruments to address endogeneity. Estimates apply to specific subpopulation (compliers). Natural experiments from policy variation can answer causal questions decades later when combined with administrative data.
+
+\subsection{Observational Designs}
+
+\subsubsection{Case Study 6: Framingham Heart Study (Cohort)}
+
+\paragraph{Research Question.} What factors contribute to cardiovascular disease?
+
+\paragraph{Background.} Launched in 1948, the Framingham Heart Study recruited 5,209 adults in Framingham, Massachusetts for long-term follow-up to identify risk factors for heart disease.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Observational
+    \item \textbf{Assignment}: Self-selection (voluntary participation)
+    \item \textbf{Temporal}: Longitudinal (decades of follow-up, now multi-generational)
+    \item \textbf{Unit tracking}: Cohort (same individuals followed repeatedly)
+    \item \textbf{Directionality}: Prospective (risk factors measured before disease onset)
+    \item \textbf{Comparison}: Between-unit (those who develop disease vs. those who don't)
+    \item \textbf{Data provenance}: Primary (repeated medical examinations every 2 years)
+    \item \textbf{Measurement}: Biomarkers (blood pressure, cholesterol), direct observation (physical exams), medical records (disease outcomes)
+    \item \textbf{Confounding control}: Statistical adjustment for multiple risk factors
+\end{itemize}
+
+\paragraph{Key Findings.} Identified major cardiovascular risk factors including high blood pressure, high cholesterol, smoking, obesity, diabetes, and physical inactivity. Established the concept of "risk factors" in epidemiology.
+
+\paragraph{Lessons.} Prospective cohort designs establish temporal precedence and reduce recall bias. Long-term follow-up enables study of diseases with long latency periods. Cannot establish causality with certainty (residual confounding possible) but provides strong evidence when combined with biological plausibility and consistency across studies. Multi-generational design allows study of genetic and familial factors.
+
+\subsubsection{Case Study 7: Nurses' Health Study (Cohort)}
+
+\paragraph{Research Question.} What lifestyle factors affect women's health, particularly cancer and cardiovascular disease?
+
+\paragraph{Background.} Initiated in 1976, enrolled 121,700 female nurses aged 30-55. Nurses chosen because expected to provide accurate health information and high follow-up rates.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Observational
+    \item \textbf{Assignment}: Self-selection into exposures (diet, hormone use, lifestyle)
+    \item \textbf{Temporal}: Longitudinal (ongoing since 1976)
+    \item \textbf{Unit tracking}: Cohort (same nurses followed via biennial questionnaires)
+    \item \textbf{Directionality}: Prospective
+    \item \textbf{Data provenance}: Primary (questionnaires) plus medical records for outcome validation
+    \item \textbf{Measurement}: Self-report (diet, lifestyle) validated by biomarkers in subsample
+    \item \textbf{Confounding control}: Statistical adjustment, stratification
+\end{itemize}
+
+\paragraph{Key Findings.} Documented health effects of oral contraceptives, hormone replacement therapy, diet, physical activity, and smoking. Findings influenced clinical practice and public health recommendations.
+
+\paragraph{Lessons.} Selective sampling (nurses) traded representativeness for measurement quality and retention. Very large sample size enabled detection of small effects and analysis of rare outcomes. Repeated measures allowed time-varying exposure assessment. Validation studies addressed measurement error in self-reported exposures.
+
+\subsubsection{Case Study 8: Smoking and Lung Cancer (Case-Control)}
+
+\paragraph{Research Question.} Is smoking a cause of lung cancer?
+
+\paragraph{Background.} Early case-control studies in the 1950s (Doll \& Hill, Wynder \& Graham) compared smoking histories of lung cancer patients to controls.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Observational
+    \item \textbf{Assignment}: Outcome-based sampling (select cases and controls)
+    \item \textbf{Temporal}: Cross-sectional with retrospective exposure assessment
+    \item \textbf{Directionality}: Retrospective (outcome known, assess past exposure)
+    \item \textbf{Comparison}: Between-unit (cases vs. controls)
+    \item \textbf{Data provenance}: Primary (interviews)
+    \item \textbf{Measurement}: Self-report of smoking history
+    \item \textbf{Confounding control}: Matching on age, sex, hospital
+\end{itemize}
+
+\paragraph{Key Design Features.}
+\begin{itemize}
+    \item Efficient for rare outcomes (lung cancer uncommon in general population)
+    \item Cases: patients with confirmed lung cancer
+    \item Controls: patients hospitalized for other conditions (not lung disease)
+    \item Matching ensured comparability on key demographics
+\end{itemize}
+
+\paragraph{Key Findings.} Overwhelming association between smoking and lung cancer: nearly all lung cancer patients were smokers; dose-response relationship (more smoking → higher risk).
+
+\paragraph{Lessons.} Case-control design efficient for rare diseases. Retrospective exposure assessment vulnerable to recall bias, but smoking history relatively objective. Findings consistent across multiple independent studies strengthened causal inference despite observational design. Established foundation for subsequent prospective cohort studies and eventually experimental evidence from animal studies.
+
+\subsubsection{Case Study 9: Social Capital and Health (Cross-Sectional)}
+
+\paragraph{Research Question.} Is social connectedness associated with health outcomes at the community level?
+
+\paragraph{Background.} Ecological studies examined whether communities with higher social capital (civic engagement, trust, social networks) have better health outcomes.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Observational
+    \item \textbf{Assignment}: Natural variation across communities
+    \item \textbf{Temporal}: Cross-sectional (single time point)
+    \item \textbf{Directionality}: Simultaneous (social capital and health measured concurrently)
+    \item \textbf{Comparison}: Between-unit (across communities/states)
+    \item \textbf{Unit of analysis}: Aggregate (states or communities)
+    \item \textbf{Data provenance}: Secondary (surveys, vital statistics)
+    \item \textbf{Measurement}: Survey-based social capital indices, administrative health data
+    \item \textbf{Confounding control}: Statistical adjustment for socioeconomic factors
+\end{itemize}
+
+\paragraph{Key Findings.} States with higher social capital showed lower mortality rates, even controlling for income and other socioeconomic factors. Associations found for multiple health outcomes.
+
+\paragraph{Lessons.} Cross-sectional ecological designs can identify community-level associations but cannot establish causality (reverse causation possible: health affects social capital). Cannot infer individual-level relationships (ecological fallacy). Useful for generating hypotheses and identifying targets for intervention but require confirmation from stronger designs.
+
+\subsection{Panel Studies}
+
+\subsubsection{Case Study 10: Panel Study of Income Dynamics (PSID)}
+
+\paragraph{Research Question.} How do economic circumstances change over time and across generations?
+
+\paragraph{Background.} Launched in 1968, PSID has followed U.S. families annually (now biennially), tracking economic mobility, family dynamics, and health across five decades.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Observational
+    \item \textbf{Assignment}: Self-selection into economic behaviors
+    \item \textbf{Temporal}: Longitudinal (50+ years)
+    \item \textbf{Unit tracking}: Panel (same families followed, including children who form new households)
+    \item \textbf{Directionality}: Prospective
+    \item \textbf{Comparison}: Within-unit and between-unit
+    \item \textbf{Data provenance}: Primary (interviews)
+    \item \textbf{Sampling}: Probability sample initially representative of U.S.
+    \item \textbf{Measurement}: Self-report (income, employment, family structure)
+    \item \textbf{Confounding control}: Fixed effects for within-unit comparisons
+\end{itemize}
+
+\paragraph{Key Applications.} Researchers have used PSID to study: income volatility and mobility, effects of job loss and unemployment, intergenerational transmission of economic status, effects of family structure changes, and long-term effects of childhood poverty.
+
+\paragraph{Key Findings.} Documented substantial economic mobility within lifetimes but also persistent inequality across generations. Identified role of job displacement in long-term earnings losses. Showed childhood economic circumstances affect adult outcomes even controlling for education.
+
+\paragraph{Lessons.} Panel designs enable within-person analysis controlling for stable unobserved characteristics. Very long panel allows multi-generational analysis. Attrition challenges increase over time but can be addressed through weighting and bounds analysis. Panel data uniquely suited to questions about change, transitions, and dynamics.
+
+\subsection{Digital Trace Studies}
+
+\subsubsection{Case Study 11: Social Media and Political Polarization}
+
+\paragraph{Research Question.} Does exposure to opposing political views on social media reduce polarization?
+
+\paragraph{Background.} Researchers partnered with Twitter to conduct a field experiment where users were offered financial incentives to follow bot accounts that retweeted messages from elected officials and opinion leaders from the opposing political party.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Experimental (researchers controlled bot follow recommendations)
+    \item \textbf{Assignment}: Randomized (users randomly offered incentive or not)
+    \item \textbf{Temporal}: Longitudinal (baseline and follow-up surveys, continuous Twitter activity)
+    \item \textbf{Data provenance}: Mixed (Twitter behavioral data + surveys)
+    \item \textbf{Measurement}: Digital trace (following behavior, tweeting, retweeting) + self-report (political attitudes)
+    \item \textbf{Confounding control}: Randomization
+\end{itemize}
+
+\paragraph{Key Findings.} Exposure to opposing views increased political polarization rather than reducing it, particularly among Republicans. Democrats showed no significant change.
+
+\paragraph{Lessons.} Digital platforms enable large-scale behavioral observation and field experiments. Combining trace data (actual behavior) with surveys (attitudes) provides richer picture than either alone. Demonstrates that intuitive predictions about social media effects may be wrong—empirical testing essential.
+
+\subsubsection{Case Study 12: Emotional Contagion on Facebook}
+
+\paragraph{Research Question.} Do emotions spread through social networks?
+
+\paragraph{Background.} Facebook data scientists manipulated News Feed content for 689,003 users for one week, reducing exposure to either positive or negative emotional content.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Intervention}: Experimental (Facebook controlled content shown)
+    \item \textbf{Assignment}: Randomized (users assigned to conditions)
+    \item \textbf{Temporal}: Short panel (one week)
+    \item \textbf{Measurement}: Digital trace (linguistic analysis of posts)
+    \item \textbf{Data provenance}: Secondary (platform data)
+    \item \textbf{Confounding control}: Randomization
+\end{itemize}
+
+\paragraph{Key Findings.} Reducing positive content led to more negative posts; reducing negative content led to more positive posts. Effect sizes were very small but statistically significant given large sample.
+
+\paragraph{Lessons.} Digital platforms enable massive-scale experiments. Automated text analysis allows outcome measurement without surveys. Study sparked major ethical debate about informed consent in platform experiments, illustrating that technical feasibility doesn't equal ethical acceptability. Very large samples can detect statistically significant effects that are substantively tiny.
+
+\subsection{Meta-Analysis}
+
+\subsubsection{Case Study 13: Early Childhood Education Effects (Meta-Analysis)}
+
+\paragraph{Research Question.} What are the overall effects of early childhood education programs on child development?
+
+\paragraph{Background.} Hundreds of studies have evaluated early childhood interventions with varying designs, populations, and findings. Meta-analysis synthesizes this evidence.
+
+\paragraph{Dimensional Configuration.}
+\begin{itemize}
+    \item \textbf{Unit of analysis}: Studies (not individuals)
+    \item \textbf{Data provenance}: Secondary (published and unpublished studies)
+    \item \textbf{Temporal}: Retrospective synthesis
+    \item \textbf{Measurement}: Effect sizes extracted from primary studies
+    \item \textbf{Confounding control}: None directly; assessment of study quality
+\end{itemize}
+
+\paragraph{Key Design Features.}
+\begin{itemize}
+    \item Systematic literature search
+    \item Inclusion criteria: experimental or quasi-experimental evaluations of early education
+    \item Meta-regression to examine moderators (program type, child age, outcome domain, study design)
+    \item Publication bias assessment
+\end{itemize}
+
+\paragraph{Key Findings.} Early childhood programs show positive average effects on cognitive and social-emotional development. Effects larger for: higher-quality programs, disadvantaged children, and programs starting earlier. Effects persist into elementary school but may fade over time without sustained intervention.
+
+\paragraph{Lessons.} Meta-analysis provides quantitative synthesis across heterogeneous studies. Can examine moderators to understand when/where/for whom effects occur. Requires careful assessment of study quality and publication bias. Synthesis strength limited by quality of primary studies.
+
+\subsection{Synthesis: What Makes a Good Case Study?}
+
+These examples illustrate several principles:
+
+\paragraph{Design follows question.} The research question determines what type of design is needed. Causal questions typically require experimental or quasi-experimental designs; descriptive questions may use observational approaches.
+
+\paragraph{Constraints shape design.} Ethical and practical constraints often rule out ideal designs, forcing researchers to adapt. The best studies creatively exploit available opportunities (natural experiments, institutional rules, existing data).
+
+\paragraph{Tradeoffs are inevitable.} Every design sacrifices something: RCTs may lack external validity; quasi-experiments rely on strong assumptions; observational studies face confounding. Good research acknowledges these tradeoffs explicitly.
+
+\paragraph{Context matters.} Design appropriateness depends on the specific research context. Designs that work well for one question may be inappropriate for another.
+
+\paragraph{Multiple studies build knowledge.} Single studies rarely definitively answer questions. Convergent evidence from multiple designs (e.g., case-control, then cohort, then RCT for smoking and cancer) provides strongest causal inference.
+
+\paragraph{Innovation in design is ongoing.} Researchers continually develop new designs (synthetic controls, bunching designs, event studies) and combine features from multiple schemes to exploit specific opportunities.
+
+Understanding these canonical examples provides a foundation for designing new studies and critically evaluating existing research.

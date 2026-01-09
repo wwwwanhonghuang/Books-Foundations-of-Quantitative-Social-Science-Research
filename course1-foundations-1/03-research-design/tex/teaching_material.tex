@@ -1,0 +1,162 @@
+\documentclass[12pt,a4paper]{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{placeins}
+\usepackage{tabularx}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds,calc}
+\usepackage{rotating}
+
+
+% Code listing settings
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false
+}
+
+% Custom boxes for teaching
+\newtcolorbox{keypoint}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title=Key Point
+}
+
+\newtcolorbox{example}{
+    colback=green!5!white,
+    colframe=green!75!black,
+    title=Example
+}
+
+\newtcolorbox{exercise}{
+    colback=orange!5!white,
+    colframe=orange!75!black,
+    title=Exercise
+}
+
+\newtcolorbox{warning}{
+    colback=red!5!white,
+    colframe=red!75!black,
+    title=Common Pitfall
+}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{Topic: \topicname}
+\cfoot{\thepage}
+
+% Document metadata - CUSTOMIZE THESE
+\newcommand{\coursename}{Foundations of Quantitative Social Science Research}
+\newcommand{\topicname}{Research Design}
+\newcommand{\lecturenum}{Lecture 2-3}
+\newcommand{\instructor}{Wanhong Huang}
+\newcommand{\semester}{Spring 2025}
+
+\title{\textbf{\coursename} \\ \lecturenum: \topicname}
+\author{\instructor}
+\date{\semester}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+%=============================================================================
+% SECTION 1: LEARNING OBJECTIVES
+%=============================================================================
+\section{Learning Objectives}
+
+By the end of this session, students will be able to:
+
+\begin{enumerate}
+    \item Understand the foundational logic of quantitative social science research, including the full research lifecycle from question formulation to interpretation and dissemination.
+    \item Distinguish major research schemes (e.g., experimental, quasi-experimental, and observational designs) and explain how their structural dimensions constrain measurement, comparison, and inference.
+    \item Critically evaluate the identification assumptions underlying different quantitative methods, and assess their plausibility in applied research settings.
+    \item Select and justify appropriate measurement strategies and confounding control techniques for their own research questions.
+\end{enumerate}
+
+%=============================================================================
+% SECTION 2: OVERVIEW
+%=============================================================================
+\section{Overview}
+
+\begin{keypoint}
+Quantitative social science research is not defined by individual methods or tools, but by coherent design choices that link 
+research questions, data, methods, and assumptions across the entire research lifecycle.
+\end{keypoint}
+
+This session introduces a unified framework for understanding quantitative social science research as an integrated process 
+rather than a collection of isolated techniques. We examine how classical research 
+designs (such as randomized experiments, cohort studies, and panel designs) and modern 
+approaches (including digital trace analysis and adaptive designs) can be systematically compared along shared 
+dimensions such as intervention structure, temporal organization, comparison logic, and confounding control.
+
+Rather than focusing on algorithmic details, the emphasis is placed on methodological reasoning: how design choices encode 
+assumptions, how measurement modalities shape inference, and how different research schemes achieve (or fail to achieve) 
+credible causal and descriptive claims. This perspective provides students with a conceptual map that supports both critical reading of empirical studies and principled design of their own quantitative research projects.
+
+
+
+
+\input{partials/scheme_formation.tex}
+\input{partials/design_selection.tex}
+\input{partials/case_studies.tex}
+
+
+
+
+%=============================================================================
+% APPENDIX (Optional)
+%=============================================================================
+\appendix
+% \section{Additional Materials}
+
+% \subsection{Mathematical Derivations}
+% Detailed proofs and derivations for interested students.
+
+% \subsection{Extended Code Examples}
+% Complete implementations and additional examples.
+
+% \subsection{Dataset Information}
+% Information about datasets used in examples and exercises.
+
+\end{document}

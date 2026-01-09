@@ -1,0 +1,295 @@
+
+\section{Design Selection and Justification}
+
+Selecting an appropriate research design involves mapping the research question to a feasible and inferentially defensible configuration of design dimensions. This process requires:
+
+\begin{enumerate}
+    \item \textbf{Clarifying the inferential goal}: Is the objective causal identification, descriptive characterization, prediction, or hypothesis generation? What population and effect are of interest?
+    
+    \item \textbf{Identifying constraints}: What ethical, practical, temporal, or resource constraints limit design options? Are randomization or experimental manipulation feasible? What measurement modalities are available and valid for key constructs?
+    
+    \item \textbf{Assessing identification strategies}: What assumptions are required for valid inference under each feasible design? Which confounding control strategies are available given the data structure?
+    
+    \item \textbf{Evaluating tradeoffs}: How do different designs balance internal validity, external validity, precision, bias, measurement validity, and ethical considerations?
+    
+    \item \textbf{Justifying the chosen design}: Explicitly articulate why the selected configuration is appropriate given the research context, what assumptions it relies upon, and why alternative configurations are less suitable.
+\end{enumerate}
+
+Design justification is not merely procedural. It requires substantive argumentation about why the chosen dimensional configuration supports the intended inference and why alternative configurations are less suitable. This justification should address both the strengths and limitations of the design, including the assumptions on which valid inference depends.
+
+\subsection{Design Justification Template}
+
+A complete design justification should address:
+
+\begin{itemize}
+    \item \textbf{Research question and inferential goal}: What is the target estimand? Is causal identification required?
+    
+    \item \textbf{Intervention structure justification}: Why is the chosen level of intervention (experimental, quasi-experimental, observational) appropriate or necessary?
+    
+    \item \textbf{Assignment mechanism rationale}: How does the assignment mechanism support or constrain causal inference?
+    
+    \item \textbf{Temporal design rationale}: Why is the chosen temporal structure sufficient for the research question?
+    
+    \item \textbf{Measurement validity argument}: Why are the chosen measurement modalities valid for the constructs of interest? What are their known biases and how are they addressed?
+    
+    \item \textbf{Confounding control justification}: What confounding control strategy is employed? What assumptions does it require? Why are these assumptions plausible in this context? What sensitivity analyses or robustness checks are conducted?
+    
+    \item \textbf{Alternative designs considered}: What other dimensional configurations were considered? Why were they rejected (infeasibility, ethical concerns, weaker identification)?
+    
+    \item \textbf{Limitations acknowledged}: What are the key limitations of the chosen design? What threats to validity remain? How might these limitations affect interpretation?
+\end{itemize}
+
+Transparent articulation of design logic strengthens the credibility of empirical claims and enables critical evaluation by the scientific community.
+
+\subsection{Example: Design Justification for a Cohort Study of Educational Interventions}
+
+\emph{Research question}: Does participation in an afterschool mentoring program improve high school graduation rates among at-risk youth?
+
+\emph{Dimensional configuration}: Observational design with self-selection into mentoring; longitudinal temporal structure following students from program entry through graduation-eligible age; cohort tracking of students who entered high school in the same year; prospective directionality with program participation measured at baseline and graduation observed subsequently; between-unit comparison of program participants and non-participants; primary data collection through surveys and administrative records; statistical adjustment using propensity score weighting to control confounding.
+
+\emph{Justification}: 
+\begin{itemize}
+    \item Random assignment to mentoring is infeasible because the program operates outside researcher control and denying mentoring to willing participants raises ethical concerns.
+    \item Longitudinal temporal structure is necessary to establish temporal precedence and observe graduation outcomes, which occur years after program entry.
+    \item Cohort design ensures comparability in terms of entry year, reducing confounding by cohort-specific factors (e.g., policy changes, economic conditions).
+    \item Prospective directionality minimizes recall bias in program participation measurement.
+    \item Propensity score weighting controls for observed confounders (prior academic performance, socioeconomic status, family structure, neighborhood characteristics) that predict both program participation and graduation. Conditional independence is plausible if all key confounders are measured.
+    \item Administrative records for graduation outcomes reduce measurement error relative to self-report.
+    \item Limitations: Unmeasured confounding remains possible (e.g., student motivation, family support). Sensitivity analyses quantify the strength of unmeasured confounding needed to eliminate the observed effect. External validity is limited to the specific program and student population studied.
+\end{itemize}
+
+This justification explicates the logic linking design choices to inferential goals, acknowledges assumptions and limitations, and demonstrates considered decision-making. 
+
+\section{Recap: From Research Questions to Research Schemes}
+
+The relationship between research questions and research schemes is not mechanical. Researchers do not simply "apply" a predetermined scheme to a given question. Instead, design selection emerges from an iterative process of conceptualization, operationalization, and constraint mapping. This section describes the practical workflow through which researchers move from substantive questions to feasible research designs.
+
+\subsection{The Design Selection Workflow}
+
+Research design begins with a substantive question and proceeds through several stages of refinement and constraint assessment. The process is rarely linear—researchers often cycle between stages as they discover new constraints or refine their understanding of what is feasible and inferentially defensible.
+
+\subsubsection{Stage 1: Conceptual Clarification}
+
+Before selecting a design, researchers must clarify what they are trying to learn. This involves:
+
+\paragraph{Articulating the substantive question.} What real-world phenomenon or relationship are you trying to understand? For example: "Do afterschool programs improve academic outcomes?" or "How does social media use affect mental health?"
+
+\paragraph{Identifying the type of inference desired.} Different research goals require different designs:
+\begin{itemize}
+    \item \emph{Causal inference}: Estimating the effect of an intervention or exposure on an outcome (e.g., "Does X cause Y?")
+    \item \emph{Descriptive inference}: Characterizing a population, distribution, or relationship (e.g., "What proportion of X exhibit Y?")
+    \item \emph{Predictive inference}: Forecasting future outcomes or states (e.g., "Given X, what is the likely value of Y?")
+    \item \emph{Exploratory inquiry}: Generating hypotheses or identifying patterns (e.g., "What factors are associated with Y?")
+\end{itemize}
+
+The inferential goal fundamentally constrains design options. Causal inference requires temporal precedence and confounding control. Descriptive inference may not require these features but demands representative sampling. Prediction prioritizes out-of-sample performance over causal interpretation.
+
+\paragraph{Defining the target population and estimand.} For whom or what should the inference hold? The target population determines sampling requirements. The estimand (the quantity to be estimated) determines what comparisons must be constructed and what variation must be observed.
+
+\subsubsection{Stage 2: Operationalization}
+
+Conceptual clarity must be translated into measurable variables and observable units. This stage involves:
+
+\paragraph{Defining units of observation and analysis.} What are the entities being studied? Individuals? Organizations? Geographic areas? Time periods? The unit definition affects what data sources are available and what level of aggregation is appropriate.
+
+\paragraph{Operationalizing key constructs.} How will abstract concepts (e.g., "program participation," "academic achievement," "mental health") be measured? Available measurement modalities constrain design options. If valid biomarkers exist, experimental designs with objective measurement become more feasible. If only self-report is available, designs must account for reporting bias.
+
+\paragraph{Identifying the exposure or treatment of interest.} What is the intervention, exposure, or predictor whose effect or association is of interest? Can it be manipulated? Is it binary or continuous? Does it vary naturally? These characteristics determine whether experimental, quasi-experimental, or observational designs are possible.
+
+\paragraph{Specifying the outcome.} What is being affected or predicted? When can it be observed? How long after exposure does it occur? The temporal gap between exposure and outcome determines the required duration of follow-up and whether prospective or retrospective observation is feasible.
+
+At this stage, researchers often discover that their initial question is not operationalizable with available measures. This may require reconceptualizing the question, seeking new measurement tools, or accepting that some aspects of the question cannot be empirically addressed.
+
+\subsubsection{Stage 3: Constraint Assessment}
+
+With a clear question and operational definitions, researchers assess what designs are feasible given practical, ethical, and resource constraints:
+
+\paragraph{Ethical constraints.} Can the exposure be manipulated? Is random assignment ethically acceptable? Harmful exposures cannot be experimentally assigned. Withholding beneficial interventions from control groups may be unethical. These constraints rule out certain experimental designs.
+
+\paragraph{Feasibility constraints.} Can the researcher control assignment? Do the necessary data exist? Can subjects be followed over time? Many exposures (race, gender, early-life experiences) cannot be manipulated. Many outcomes (rare diseases, long-term effects) cannot be observed within typical research timelines. These constraints often necessitate observational designs.
+
+\paragraph{Resource constraints.} What is affordable in terms of time, funding, and personnel? Experimental designs with primary data collection are expensive. Longitudinal designs require sustained funding. Large representative samples are costly. Resource constraints may force compromises between ideal and feasible designs.
+
+\paragraph{Temporal constraints.} How quickly are results needed? Experimental trials require time for recruitment, intervention, and follow-up. Longitudinal designs span years or decades. Secondary data analysis can be rapid but sacrifices control over measurement. Urgent questions may necessitate cross-sectional designs despite inferential limitations.
+
+\paragraph{Data availability.} What data already exist? Administrative records may enable large-scale quasi-experimental designs at low cost but with construct validity concerns. Survey data may provide rich measurement but limited sample sizes. The existence and accessibility of secondary data fundamentally shapes design options.
+
+Constraint assessment often reveals that the ideal design for the research question is infeasible. This forces researchers to select among imperfect alternatives, balancing inferential strength against practical realities.
+
+\subsubsection{Stage 4: Dimensional Configuration}
+
+Given the clarified question and assessed constraints, researchers now configure design dimensions to construct a feasible scheme:
+
+\paragraph{Intervention structure.} If manipulation is ethical and feasible, experimental designs are possible. If manipulation is impossible but structured natural variation exists (policy changes, thresholds, instruments), quasi-experimental designs may be viable. Otherwise, observational designs are necessary.
+
+\paragraph{Assignment mechanism.} If intervention is possible, can randomization be implemented? If not, what determines assignment? The assignment mechanism determines what identification strategies are available and what assumptions must be invoked.
+
+\paragraph{Temporal structure and unit tracking.} Can units be followed over time? Is repeated observation feasible given attrition and cost? The temporal dimension is determined by the need to establish temporal precedence, observe change, or exploit within-unit variation for confounding control.
+
+\paragraph{Comparison logic.} What source of counterfactual comparison is most credible? Between-unit comparisons require exchangeability (achieved through randomization, matching, or adjustment). Within-unit comparisons require temporal stability. The comparison logic follows from the assignment mechanism and available data.
+
+\paragraph{Confounding control strategy.} Given the assignment mechanism, temporal structure, and available covariates, what confounding control is possible? Randomization eliminates confounding by design. Design-based identification (RDD, IV, DiD) exploits structural features. Statistical adjustment relies on measured confounders. The control strategy is constrained by prior dimensional choices.
+
+\paragraph{Measurement modality and data provenance.} What measurement approaches are valid and feasible for key constructs? Primary data allow tailored measurement but at high cost. Secondary data are cheaper but may not align well with constructs. The measurement dimension is constrained by budget, construct definitions, and data availability.
+
+This configuration process is iterative: choices on one dimension constrain options on others. For example, choosing longitudinal temporal structure enables fixed effects confounding control, which in turn may reduce the need for rich covariate measurement. Researchers navigate this constrained design space, seeking coherent configurations that support the intended inference.
+
+\subsubsection{Stage 5: Scheme Recognition and Adaptation}
+
+Once dimensional values are configured, researchers often recognize that their design corresponds to a canonical research scheme. This recognition is valuable because schemes come with established inferential frameworks, known assumptions, and standard methods.
+
+For example, a design with:
+\begin{itemize}
+    \item Observational intervention
+    \item Self-selection assignment
+    \item Longitudinal temporal structure
+    \item Cohort tracking
+    \item Prospective directionality
+    \item Between-unit comparison
+    \item Primary data
+    \item Statistical adjustment for confounding
+\end{itemize}
+is recognizable as a \emph{cohort study}. This recognition connects the design to a literature on cohort study methods, standard analysis approaches, and typical threats to validity.
+
+However, many real designs do not perfectly match canonical schemes. Researchers may combine features from multiple schemes or create hybrid designs tailored to specific contexts. The dimensional framework enables precise communication about such designs even when they do not fit standard categories.
+
+\subsection{Justifying Design Choices}
+
+Design justification articulates the logic connecting research question, constraints, dimensional configuration, and inferential assumptions. A complete justification addresses:
+
+\paragraph{Why this inferential goal?} What substantive question motivates the study? What type of inference (causal, descriptive, predictive) is required to address it?
+
+\paragraph{Why these operational definitions?} How do the chosen measures capture the constructs of interest? What measurement biases exist and how are they addressed or acknowledged?
+
+\paragraph{Why this dimensional configuration?} For each dimension, explain:
+\begin{itemize}
+    \item What alternatives were considered
+    \item What constraints ruled them out or made them less desirable
+    \item How the chosen value supports the inferential goal
+\end{itemize}
+
+\paragraph{What assumptions does this design require?} Make explicit the identifying assumptions on which valid inference depends. For example:
+\begin{itemize}
+    \item Experimental designs assume compliance and no spillover
+    \item Quasi-experimental designs have design-specific assumptions (parallel trends for DiD, continuity for RDD, exclusion restriction for IV)
+    \item Observational designs with statistical adjustment assume conditional independence (no unmeasured confounding)
+\end{itemize}
+
+\paragraph{How plausible are these assumptions?} Provide substantive arguments or empirical evidence supporting key assumptions. Discuss what would have to be true for assumptions to be violated and whether such violations seem likely.
+
+\paragraph{What are the key limitations?} Acknowledge what the design cannot do. What threats to validity remain unaddressed? How might violations of assumptions or other limitations affect interpretation?
+
+\paragraph{What sensitivity analyses are planned?} How will robustness of findings to assumption violations be assessed? For observational designs, how strong would unmeasured confounding need to be to overturn results?
+
+\subsection{Example: From Question to Design}
+
+To illustrate the workflow, consider the development of a study design for the question: "Does participation in afterschool mentoring programs improve high school graduation rates among at-risk youth?"
+
+\paragraph{Stage 1: Conceptual clarification.}
+\begin{itemize}
+    \item Inferential goal: Causal inference (effect of mentoring on graduation)
+    \item Target population: At-risk youth (operationally defined as students with low prior achievement or socioeconomic disadvantage)
+    \item Estimand: Average treatment effect of mentoring participation on graduation probability
+\end{itemize}
+
+\paragraph{Stage 2: Operationalization.}
+\begin{itemize}
+    \item Units: Individual students
+    \item Exposure: Participation in specific mentoring program (binary: participant vs. non-participant)
+    \item Outcome: High school graduation (binary: graduate vs. not), observed 4-5 years after program entry
+    \item Key covariates: Prior academic performance, socioeconomic status, family structure, neighborhood characteristics (available from school records and baseline survey)
+\end{itemize}
+
+\paragraph{Stage 3: Constraint assessment.}
+\begin{itemize}
+    \item Ethical constraints: Random assignment infeasible—program operates independently and denying mentoring to willing students is ethically problematic
+    \item Feasibility: Cannot manipulate program participation; program enrollment is voluntary
+    \item Resources: Moderate budget allows baseline survey and administrative data linkage but not intensive primary data collection
+    \item Temporal: Results needed within 6 years; graduation outcomes observable within this window
+    \item Data: Administrative graduation records available; baseline survey feasible; no biomarkers needed
+\end{itemize}
+
+\paragraph{Stage 4: Dimensional configuration.}
+\begin{itemize}
+    \item Intervention: Observational (cannot randomize)
+    \item Assignment: Self-selection (students choose whether to participate)
+    \item Temporal: Longitudinal (must follow students from program entry to graduation)
+    \item Unit tracking: Cohort (follow students entering high school in same year to control cohort effects)
+    \item Directionality: Prospective (measure participation at baseline, observe graduation later)
+    \item Comparison: Between-unit (compare participants to non-participants)
+    \item Data provenance: Mixed (baseline survey + administrative graduation records)
+    \item Measurement: Self-report for participation, administrative records for graduation
+    \item Confounding control: Statistical adjustment via propensity score weighting (observed confounders predict both participation and graduation)
+\end{itemize}
+
+\paragraph{Stage 5: Scheme recognition.}
+This configuration is recognizable as a prospective cohort study with propensity score adjustment. The design follows established cohort study methods while adapting to the specific context (mentoring programs, educational outcomes).
+
+\paragraph{Justification.}
+\begin{itemize}
+    \item Random assignment ruled out by ethical and feasibility constraints
+    \item Longitudinal structure necessary to observe graduation outcomes and establish temporal precedence
+    \item Cohort design controls for cohort-specific confounders (policy changes, economic conditions)
+    \item Propensity score weighting addresses selection bias by balancing groups on observed characteristics
+    \item Key assumption: Conditional independence—all important confounders measured (plausible given rich administrative data and baseline survey)
+    \item Limitations: Unmeasured confounding possible (e.g., student motivation, family support not fully captured). Sensitivity analyses will quantify robustness to unmeasured confounding. External validity limited to this program and population.
+\end{itemize}
+
+This example shows how design selection proceeds from question to constraints to dimensional configuration to scheme recognition, with justification explaining the logic at each step.
+
+\subsection{Common Design Selection Patterns}
+
+Certain patterns recur in design selection workflows. Recognizing these patterns helps researchers navigate the design space more efficiently.
+
+\paragraph{Pattern 1: Ideal design infeasible → closest feasible alternative.}
+Researchers often begin with an ideal design (typically an RCT for causal questions) but discover it is infeasible. The task becomes finding the closest approximation that remains feasible. This might mean:
+\begin{itemize}
+    \item Experimental → Quasi-experimental (exploiting natural experiments, RDD, or IV when randomization is impossible)
+    \item Randomized → Matching/adjustment (when assignment cannot be controlled but rich covariates are available)
+    \item Longitudinal → Cross-sectional (when follow-up is impossible, accepting limitations on temporal inference)
+\end{itemize}
+
+\paragraph{Pattern 2: Constraint-driven dimension fixing.}
+Some constraints directly determine dimensional values, which then cascade to constrain other dimensions:
+\begin{itemize}
+    \item Cannot manipulate exposure → Observational intervention → Self-selection or natural assignment → Need confounding control through matching/adjustment or design-based identification
+    \item Cannot follow units over time → Cross-sectional temporal structure → Cannot use within-unit comparison or fixed effects → Must rely on between-unit comparisons
+    \item Only secondary data available → Predetermined measurement modality and data provenance → Construct validity concerns → May need validation studies
+\end{itemize}
+
+\paragraph{Pattern 3: Opportunistic design.}
+Sometimes researchers discover unexpected opportunities that enable stronger designs:
+\begin{itemize}
+    \item Policy change creates natural experiment enabling DiD or synthetic control
+    \item Threshold-based program eligibility enables RDD
+    \item Lottery-based oversubscribed program enables IV design
+    \item Existing high-quality administrative data enables large-scale observational analysis
+\end{itemize}
+Opportunistic designs require recognizing these structural features and adapting methods to exploit them.
+
+\paragraph{Pattern 4: Hybrid and adaptive designs.}
+Researchers increasingly combine features from multiple canonical schemes:
+\begin{itemize}
+    \item RDD with difference-in-differences (exploiting both threshold and panel structure)
+    \item Matching combined with regression adjustment (doubly robust estimation)
+    \item Natural experiment with synthetic controls (for improved comparison group construction)
+    \item Experimental design with administrative data linkage (reducing measurement cost and attrition)
+\end{itemize}
+
+These patterns reflect the reality that design selection is a pragmatic problem-solving process, not a formulaic application of standard templates.
+
+\subsection{Moving Forward: Design to Analysis}
+
+Once a research scheme is selected and justified, researchers proceed to:
+\begin{itemize}
+    \item Specifying the statistical model or estimation strategy appropriate for the scheme
+    \item Determining sample size and power requirements
+    \item Developing data collection protocols (for primary data) or data access strategies (for secondary data)
+    \item Planning sensitivity analyses and robustness checks
+    \item Anticipating and planning for threats to validity specific to the chosen design
+\end{itemize}
+
+These implementation details build on the dimensional configuration established during design selection. The dimensional framework provides the conceptual foundation; subsequent chapters on estimation, inference, and validity build the technical superstructure.
+
+The key insight is that research design is not a matter of selecting a pre-packaged scheme from a menu. It is a process of navigating a constrained design space, configuring dimensions to balance inferential goals against practical realities, and justifying the resulting configuration through transparent articulation of assumptions and limitations.
+
