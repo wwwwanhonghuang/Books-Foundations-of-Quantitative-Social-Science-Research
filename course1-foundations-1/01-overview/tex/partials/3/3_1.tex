@@ -1,0 +1,35 @@
+\subsection{Design Rationale}
+
+The architectural design of the proposed framework is motivated by the five core challenges identified in 
+Section~\ref{sec:introduction}. This section explicates how specific architectural decisions are intended to address these challenges and support the complete research 
+lifecycle described in Section~\ref{sec:lifecycle}.
+
+\textbf{Data and Tool Fragmentation} is addressed in the design through a unified infrastructure layer intended to provide consistent interfaces across diverse analytical methods. 
+The framework is designed to offer a single coherent API that provides consistent access to statistical analysis, machine learning, network analysis, and text processing methods, 
+while abstracting underlying methodological differences and preserving analytical flexibility. This unification is designed to 
+reduce context-switching overhead and enable seamless integration of methods from different traditions within a single workflow.
+
+\textbf{Research Lifecycle Discontinuity} is intended to be resolved through an explicit workflow layer that conceptually represents research progression across all six 
+lifecycle stages, including problem discovery, research design, data collection, data processing, data analysis, and dissemination. 
+The framework design emphasizes continuity of information flow across stage transitions. The architecture is designed such that metadata, variable definitions, transformation 
+decisions, and analytical parameters created in early stages can automatically propagate to subsequent stages, with the 
+goal of supporting automated propagation of metadata, definitions, and parameters across stages.
+
+\textbf{Structural Reproducibility Deficits} are addressed in the design through a contract-driven approach that aims to formalize research specifications as executable 
+machine-readable documents. Contracts are intended to define data schemas, workflow sequences, validation rules, and output formats, serving simultaneously as research protocol 
+documentation and computational specifications. The design includes provisions for maintaining comprehensive provenance information including code versions, parameter configurations, 
+execution timestamps, and data lineage. This approach is intended to transform reproducibility from an afterthought requiring separate documentation into an inherent property of 
+the research workflow.
+
+\textbf{Steep Learning Curves from Insufficient Abstraction} are intended to be mitigated through multiple abstraction layers designed to progressively hide complexity while 
+preserving analytical power. High-level functional APIs are designed to provide accessible entry points for common research tasks, configuration-driven workflows aim to enable 
+automation without programming, and modular components are intended to allow incremental learning. The design philosophy supports researchers beginning with simple operations 
+and gradually adopting more sophisticated techniques as needs evolve, rather than confronting the full complexity of underlying tools immediately.
+
+\textbf{Data Heterogeneity and Scale} challenges are intended to be handled through flexible data architecture designed to support diverse types including structured tabular data, 
+unstructured text and multimedia, relational network data, and spatial-temporal data. The contract system is designed to enable explicit specification of 
+data structure constraints and validation rules, with the goal of ensuring consistency across multi-source integration. The architecture provides standardized interfaces 
+for integrating different modalities' data representations, allowing heterogeneous data types—such as tabular survey responses, textual documents, network 
+structures, and temporal sequences—to coexist within unified analytical workflows while preserving their distinct structural properties and semantic requirements. Modular processing 
+pipelines are intended to accommodate varying scales through configurable transformations that preserve metadata and maintain quality controls throughout data 
+evolution, with cross-modal operations supported through interface contracts that define how data from different modalities can be aligned, linked, or jointly analyzed.

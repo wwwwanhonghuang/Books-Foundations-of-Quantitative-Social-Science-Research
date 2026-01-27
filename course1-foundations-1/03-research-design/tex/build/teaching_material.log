@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.30)  9 JAN 2026 17:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.6.30)  11 JAN 2026 13:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1596,10 +1596,10 @@ Package rerunfilecheck Info: File `teaching_material.out' has not changed.
 (rerunfilecheck)             Checksum: 5FCE112373B69B2DF2F7F26712551380;24330.
  ) 
 Here is how much of TeX's memory you used:
- 28874 strings out of 474222
- 562436 string characters out of 5748733
- 1980975 words of memory out of 5000000
- 50338 multiletter control sequences out of 15000+600000
+ 28875 strings out of 474222
+ 562472 string characters out of 5748733
+ 1979975 words of memory out of 5000000
+ 50339 multiletter control sequences out of 15000+600000
  581224 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  83i,17n,87p,1278b,843s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1615,7 +1615,7 @@ super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb><
 /usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fon
 ts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-s
 uper/sfrm2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on build/teaching_material.pdf (52 pages, 520421 bytes).
+Output written on build/teaching_material.pdf (52 pages, 520408 bytes).
 PDF statistics:
  1128 PDF objects out of 1200 (max. 8388607)
  1029 compressed objects within 11 object streams

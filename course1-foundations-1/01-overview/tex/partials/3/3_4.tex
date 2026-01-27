@@ -1,0 +1,45 @@
+
+
+\subsection{Lifecycle-Module Mapping}
+
+The framework design envisions that the six lifecycle stages described in Section~\ref{sec:lifecycle} will be supported through 
+coordinated use of multiple functional modules, with particular modules playing primary roles at different stages while remaining accessible throughout the research process. 
+This section describes the intended integration patterns, recognizing that full implementation of all coordination mechanisms remains an ongoing process.
+
+During \textit{problem discovery}, the design envisions researchers primarily utilizing the LLM Q\&A module for interactive exploration of research questions and theoretical frameworks, 
+complemented by the Data Collection \& Review module for literature discovery and the Data Processing module for preliminary exploration of existing datasets. Contracts may be drafted 
+informally at this stage to capture initial conceptualizations of data requirements and analytical approaches, though these specifications typically evolve substantially as understanding 
+deepens. Current implementation supports basic literature exploration and preliminary data examination, with AI-assisted ideation capabilities under development.
+
+The \textit{research design} stage is intended to center on formalizing research specifications through the Contract Definition module. The design envisions researchers 
+defining data schemas, workflow specifications, validation rules, and output requirements through contracts that serve as executable research protocols. 
+The Questionnaire Design module is intended to play a primary role when research involves primary data collection through surveys. 
+Current implementation supports basic contract definition for data schemas and simple data processing workflow specifications, 
+with advanced validation logic and automated questionnaire generation planned for future development.
+
+During \textit{data collection}, the Data Collection \& Review module supports systematic gathering of literature from academic databases for 
+literature review schemes or acquisition of existing datasets for secondary data analysis. The Questionnaire Design module facilitates primary data collection when 
+research employs survey methods. All collected data are stored according to schemas specified in contracts, ensuring structural consistency and metadata completeness from the outset. 
+Contract-based validation immediately identifies data quality issues or schema violations, enabling early detection and correction of problems that might otherwise propagate through subsequent 
+stages.
+
+The \textit{data processing} stage applies transformation pipelines defined through the Data Processing module. Researchers specify sequences of processing operations through contracts 
+or interactive configuration, with the system executing transformations while validating outputs against schema constraints and maintaining comprehensive provenance linking 
+processed data to raw inputs and transformation parameters. Contract-based validation ensures that processed data meet quality criteria before proceeding to analysis, 
+preventing downstream errors from malformed or inconsistent data.
+
+The \textit{analysis} stage leverages the Data Analysis module, which provides access to diverse statistical and computational methods described in 
+Section~\ref{sec:data-analysis-methods}. Analyses are configured through contracts specifying methods, parameters, and validation criteria, with the system executing 
+computations, storing structured results, 
+and maintaining provenance metadata. The Data Visualization module integrates closely with analysis procedures to generate both diagnostic plots supporting 
+analytical investigation and substantive visualizations for result presentation. Analysis contracts enable automated reanalysis when underlying data or parameters 
+change, supporting sensitivity analysis and robustness checking.
+
+During \textit{dissemination}, the LaTeX Code Generation module automates production of publication-ready tables and figures from analysis results, while the 
+Data Visualization module produces final graphics. The LLM Q\&A module assists with manuscript drafting and method description generation. All dissemination materials maintain explicit 
+links to underlying analyses, data, and code through provenance metadata, ensuring that published results remain verifiable and reproducible. Contracts governing output formats 
+ensure consistency in presentation across multiple result types.
+
+This lifecycle-module mapping illustrates how the framework supports complete research workflows through coordinated use of specialized capabilities while maintaining continuity of 
+information flow across stage transitions. The contract-driven architecture ensures that specifications, data, and metadata created in early stages automatically propagate 
+to later stages, eliminating manual coordination overhead and reducing opportunities for inconsistencies or errors.

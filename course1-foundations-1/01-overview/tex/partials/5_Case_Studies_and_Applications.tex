@@ -1,0 +1,588 @@
+\section{Illustrative Case Studies}
+\label{sec:casestudies}
+
+Case studies in this section are intended as an illustrative example rather than a fully realized empirical application. 
+It demonstrates how the proposed framework is designed to support configuration-driven analysis workflows 
+and automated artifact generation, using a simplified and partially implemented scenario.
+
+\subsection{llustrative Example: Automated Data Analysis and LaTeX Code Generation}
+\label{subsec:automated-analysis}
+
+This section demonstrates the practical application of the proposed framework through a case study on automated data analysis and LaTeX code generation. The case study illustrates how researchers 
+can leverage the framework's configuration-driven approach to establish reproducible analysis workflows while minimizing manual coding efforts.
+
+\subsubsection{Project Initialization and Structure}
+
+The analysis workflow begins with project initialization using the framework's automation scripts. Researchers execute a simple command that creates a standardized project structure, establishing the foundation for organized and reproducible analysis, as shown in Listing~\ref{lst:project-init}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Project initialization command},
+  label={lst:project-init},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+make new_project PROJECT_NAME=education_achievement_study
+\end{lstlisting}
+\end{figure}
+
+This command generates the project structure depicted in Listing~\ref{lst:project-structure}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Standardized project directory structure},
+  label={lst:project-structure},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+education_achievement_study/
+|-- data/
+|   |-- config/         # Configuration files for data processing
+|   |-- processed/      # Cleaned and transformed data
+|   |-- raw/            # Original, unmodified data
+|-- results/
+|   |-- figures/        # Generated visualizations
+|   |-- models/         # Statistical model objects
+|   |-- statistics/     # Numerical results and summaries
+|   |-- tables/         # Publication-ready LaTeX tables
+|-- statistics/
+    |-- config/         # Analysis specification files
+\end{lstlisting}
+\end{figure}
+
+The standardized structure ensures consistency across projects, facilitates collaboration, and enables automated processing through well-defined input and output locations.
+
+\subsubsection{Data Processing Configuration}
+
+Within the \texttt{data/config/} directory, researchers define their data processing pipeline using JSON configuration files. These configurations specify the sequence of transformations to be applied to raw data, as illustrated in Listing~\ref{lst:processing-pipeline}, along with detailed variable specifications shown in Listing~\ref{lst:variable-specification}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Data processing pipeline configuration},
+  label={lst:processing-pipeline},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+// data/config/processing_pipeline.json
+{
+  "steps": [
+    "handle_missing",
+    "encode_categorical", 
+    "scale_numeric",
+    "extract_text_features",
+    "save_processed"
+  ]
+}
+\end{lstlisting}
+\end{figure}
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Variable specification and metadata configuration},
+  label={lst:variable-specification},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+// data/config/variable_specification.json  
+{
+  "variables": {
+    "id": {"type": "ratio", "missing": "drop"},
+    "age": {"type": "interval", "missing": "mean", "scaling": "standard"},
+    "gender": {"type": "nominal", "missing": "most_frequent"},
+    "income": {"type": "ratio", "missing": "mean", "scaling": "minmax"},
+    "education": {"type": "ordinal", "missing": "most_frequent", 
+                  "order": ["Bachelor", "Master", "PhD"]},
+    "comments": {"type": "descriptive", "missing": "most_frequent"}
+  }
+}
+\end{lstlisting}
+\end{figure}
+
+The variable specification file in Listing~\ref{lst:variable-specification} defines metadata and processing instructions for each variable in the dataset. The \texttt{type} field specifies 
+the measurement level following Stevens' typology~\cite{stevens1946theory}, determining appropriate statistical operations and transformations. \textit{Ratio} variables like \texttt{id} 
+and \texttt{income} possess a true zero point and support all arithmetic operations. \textit{Interval} variables such as \texttt{age} have equal intervals between values but 
+lack a meaningful zero. \textit{Ordinal} variables like \texttt{education} encode ordered categories where relative ordering matters but distances between categories 
+are not necessarily equal. \textit{Nominal} variables such as \texttt{gender} represent categorical distinctions without inherent 
+ordering. \textit{Descriptive} variables like \texttt{comments} contain unstructured text requiring specialized processing rather than numerical analysis.
+
+The \texttt{missing} field in Listing~\ref{lst:variable-specification} specifies strategies for handling missing values, following standard imputation approaches. 
+The \texttt{drop} strategy removes observations with missing values, appropriate for identifier variables where imputation is meaningless. The \texttt{mean} 
+strategy replaces missing numeric values with the variable's mean, suitable for approximately normally distributed continuous variables. The \texttt{most\_frequent} 
+strategy imputes the mode for categorical variables, preserving the empirical distribution of observed categories. More sophisticated missing data handling strategies 
+such as multiple imputation could be specified through extended configuration syntax, though the current implementation supports these basic approaches.
+
+The \texttt{scaling} field determines normalization methods applied to numeric variables, facilitating comparability across variables with different units or 
+ranges. \textit{Standard scaling} transforms variables to have mean zero and unit variance through z-score normalization, commonly used when variables follow 
+approximately normal distributions and algorithms assume standardized inputs. \textit{MinMax scaling} linearly transforms variables to a specified range, 
+typically [0,1], preserving the shape of the original distribution while ensuring all variables occupy comparable ranges. Scaling choices depend on the characteristics 
+of input data and requirements of subsequent analytical methods.
+
+For ordinal variables, the \texttt{order} field explicitly specifies the intended ordering of categories, ensuring that subsequent 
+analyses respect the ordinal structure. In the example shown in Listing~\ref{lst:variable-specification}, \texttt{education} is ordered as Bachelor < Master < PhD, enabling ordinal regression models 
+or rank-based analyses to treat these categories appropriately rather than as unordered nominal categories.
+
+These configuration files enable researchers to declaratively specify their data processing requirements without writing procedural code. The system interprets these 
+specifications and executes the corresponding transformations, ensuring consistent application of preprocessing steps across different datasets and analysis runs.
+
+\subsubsection{Statistical Analysis Configuration}
+
+The heart of the automated analysis workflow resides in the \texttt{statistics/config/} 
+directory, where researchers define their analytical plans. The framework supports a comprehensive range of statistical methods through structured 
+configuration files. For multilevel modeling of educational achievement data, researchers might specify configurations as shown in Listing~\ref{lst:multilevel-models}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Multilevel model specifications for educational achievement analysis},
+  label={lst:multilevel-models},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+// statistics/config/multilevel_models.json
+{
+  "random_intercept_students": {
+    "type": "random_intercept",
+    "dependent": "test_score",
+    "fixed_effects": ["student_ses", "gender", "prior_achievement"],
+    "group": "school_id",
+    "output_file": "random_intercept_students.json"
+  },
+  
+  "growth_curve_reading": {
+    "type": "growth_curve", 
+    "dependent": "reading_score",
+    "time": "wave",
+    "fixed_effects": ["intervention", "baseline_score"],
+    "group": "student_id",
+    "time_as_random": true,
+    "output_file": "growth_curve_reading.json"
+  }
+}
+\end{lstlisting}
+\end{figure}
+
+The multilevel model configuration in Listing~\ref{lst:multilevel-models} specifies hierarchical linear models that account for nested data 
+structures~\cite{raudenbush2002hierarchical}. The \texttt{type} field determines the model specification: \textit{random\_intercept} models allow baseline values 
+to vary across groups while constraining slopes to be identical, appropriate when individual units within clusters share similar 
+response patterns but differ in baseline levels. In the example, student test scores are modeled as varying across schools with school-specific intercepts while 
+the effects of student socioeconomic status, gender, and prior achievement remain fixed across schools. The \texttt{group} field identifies the clustering variable 
+defining hierarchical structure, here \texttt{school\_id} indicating students nested within schools.
+
+\textit{Growth curve} models represent a specialized multilevel framework for analyzing change over time~\cite{singer2003applied}. The \texttt{time} field 
+specifies the temporal variable indexing repeated measurements, while \texttt{group} identifies individuals tracked longitudinally. The \texttt{time\_as\_random} parameter 
+determines whether temporal trajectories vary across individuals: when set to \texttt{true}, the model estimates individual-specific growth rates, capturing heterogeneity 
+in how different students respond to interventions over time. The \texttt{fixed\_effects} specify predictors of growth trajectories, enabling examination of 
+how baseline characteristics or interventions influence patterns of change.
+
+The \texttt{dependent} field identifies the outcome variable, and \texttt{fixed\_effects} lists predictor variables whose effects are estimated as constant across groups 
+or time points. The \texttt{output\_file} specifies where model results should be stored in structured format for subsequent processing or reporting. 
+By explicitly documenting model specification in configuration files, researchers create executable records of analytical decisions that can be reviewed, 
+modified, and reused across studies without ambiguity about model formulation.
+
+For hypothesis testing and survey analysis, additional configurations define reliability assessment, factor analysis, and validity testing as shown in Listing~\ref{lst:survey-analysis}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Survey analysis configuration for reliability assessment},
+  label={lst:survey-analysis},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+// statistics/config/survey_analysis.json
+{
+  "reliability_job_satisfaction": {
+    "type": "reliability",
+    "scales": {
+      "job_satisfaction": ["js1", "js2", "js3", "js4", "js5"],
+      "organizational_commitment": ["oc1", "oc2", "oc3", "oc4", "oc5", "oc6"]
+    },
+    "calculate_if_deleted": true,
+    "output_file": "reliability_analysis.json"
+  }
+}
+\end{lstlisting}
+\end{figure}
+
+Reliability analysis in Listing~\ref{lst:survey-analysis} assesses internal consistency of multi-item measurement scales~\cite{cronbach1951coefficient}. The \texttt{scales} field maps construct 
+names to their constituent items, explicitly documenting which observed variables are theorized to measure the same latent construct. The framework computes 
+Cronbach's alpha for each scale, quantifying the degree to which items covary as expected for reliable measurement instruments. The \texttt{calculate\_if\_deleted} parameter 
+instructs the system to compute alpha-if-item-deleted statistics, revealing whether removing specific items would improve scale reliability. This diagnostic information 
+guides scale refinement by identifying poorly performing items that contribute noise rather than signal. Reliability assessment typically precedes substantive analysis, 
+ensuring that measurement instruments exhibit adequate psychometric properties before being used as variables in hypothesis tests or structural models.
+
+The framework also includes validation configurations for assessing data quality and statistical assumptions as shown in Listing~\ref{lst:validation-checks}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Validation checks for data quality and statistical assumptions},
+  label={lst:validation-checks},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+// statistics/config/validation_checks.json
+{
+  "data_quality_check": {
+    "type": "quality_report",
+    "variables": ["income", "age", "education", "test_score"],
+    "output_file": "quality_report.json"
+  },
+  
+  "normality_tests": {
+    "type": "normality", 
+    "variables": ["income", "test_score", "age", "experience"],
+    "tests": ["shapiro", "anderson", "jarque_bera"],
+    "output_file": "normality_tests.json"
+  }
+}
+\end{lstlisting}
+\end{figure}
+
+Data quality checks in Listing~\ref{lst:validation-checks} generate comprehensive reports on variable distributions, missing 
+data patterns, outlier detection, and basic descriptive statistics. The \texttt{quality\_report} type produces 
+systematic documentation of data characteristics that inform subsequent processing decisions and alert researchers to potential 
+problems requiring attention. Such quality assessment represents essential preliminary analysis, yet it is often performed interactively 
+without systematic documentation. By specifying quality checks in configuration files, the framework ensures that data examination procedures 
+are reproducible and consistently applied across multiple datasets or analysis iterations.
+
+Normality testing in Listing~\ref{lst:validation-checks} evaluates whether variable distributions satisfy the Gaussian assumptions underlying many parametric statistical 
+methods~\cite{shapiro1965analysis}. The \texttt{tests} field specifies which statistical tests should be applied: the \textit{Shapiro-Wilk test} provides 
+high statistical power for detecting deviations from normality in small to moderate samples, the \textit{Anderson-Darling test} emphasizes tail behavior and may 
+be more sensitive to outliers, and the \textit{Jarque-Bera test} examines skewness and kurtosis to assess normality. By applying multiple tests, researchers gain 
+robust evidence about distributional assumptions that inform whether parametric methods are appropriate or whether transformations or nonparametric alternatives should 
+be considered. The configuration approach ensures that assumption checking occurs systematically rather than being omitted due to analysis workflow complexity.
+
+These configuration files serve as executable documentation of the analysis plan, making research intentions explicit and reproducible. Researchers 
+can modify analyses by editing configuration files rather than rewriting code, reducing the potential for errors and ensuring consistency across replications.
+
+\subsubsection{Automated Execution and Output Generation}
+
+Once configurations are defined, researchers execute the analysis pipeline by executing a provided script with the configurations.
+
+The framework processes each configuration file, applying the specified statistical methods to the preprocessed data. Results are automatically 
+saved in structured formats within the \texttt{results/} directory. For example, a regression analysis produces both machine-readable JSON output shown in Listing~\ref{lst:regression-output} and human-readable text summaries:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Machine-readable regression analysis output in JSON format},
+  label={lst:regression-output},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+// results/statistics/regression_income.json
+{
+  "model_type": "OLS",
+  "dependent": "income",
+  "independents": ["age", "education", "gender"],
+  "r_squared": 0.484,
+  "adj_r_squared": -1.064,
+  "n_observations": 5,
+  "coefficients": {
+    "const": {"coef": -0.2604, "std_err": 1.201, "p_value": 0.864},
+    "age": {"coef": -0.0104, "std_err": 0.469, "p_value": 0.986},
+    "education": {"coef": 0.4896, "std_err": 0.885, "p_value": 0.678},
+    "gender_M": {"coef": 0.5104, "std_err": 0.885, "p_value": 0.667}
+  }
+}
+\end{lstlisting}
+\end{figure}
+
+Simultaneously, the framework generates LaTeX code for inclusion in research manuscripts. For descriptive statistics, it produces formatted tables as shown in Listing~\ref{lst:descriptive-table}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Automatically generated LaTeX table for descriptive statistics},
+  label={lst:descriptive-table},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+% results/tables/descriptive_statistics.tex
+\begin{table}[ht]
+\centering
+\caption{Descriptive Statistics by Gender}
+\label{tab:descriptive_gender}
+\begin{tabular}{lcccccccc}
+\toprule
+ & \multicolumn{4}{c}{Age} & \multicolumn{4}{c}{Income} \\
+\cmidrule(lr){2-5} \cmidrule(lr){6-9}
+Gender & N & Mean & SD & Range & N & Mean & SD & Range \\
+\midrule
+Female & 2 & 0.50 & 1.41 & [-0.5, 1.0] & 2 & 0.47 & 0.04 & [0.44, 0.50] \\
+Male & 3 & -0.33 & 1.04 & [-1.5, 0.5] & 3 & 0.42 & 0.52 & [0.00, 1.00] \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{lstlisting}
+\end{figure}
+
+For regression results, it creates publication-ready coefficient tables as illustrated in Listing~\ref{lst:regression-table}:
+
+\begin{figure}[!t]
+\begin{lstlisting}[
+  caption={Automatically generated LaTeX table for regression results},
+  label={lst:regression-table},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+% results/tables/regression_results.tex  
+\begin{table}[ht]
+\centering
+\caption{OLS Regression Results for Income Prediction}
+\label{tab:regression_income}
+\begin{tabular}{lccc}
+\toprule
+ & Coefficient & Std. Error & p-value \\
+\midrule
+Constant & -0.260 & 1.201 & 0.864 \\
+Age & -0.010 & 0.469 & 0.986 \\
+Education & 0.490 & 0.885 & 0.678 \\
+Gender (Male) & 0.510 & 0.885 & 0.667 \\
+\midrule
+Observations & \multicolumn{3}{c}{5} \\
+R-squared & \multicolumn{3}{c}{0.484} \\
+Adjusted R-squared & \multicolumn{3}{c}{-1.064} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{lstlisting}
+\end{figure}
+
+The automated outputs shown in Listings~\ref{lst:regression-output},~\ref{lst:descriptive-table}, and~\ref{lst:regression-table} demonstrate how the framework transforms analysis specifications into executable code, statistical results, and publication-ready documents through a configuration-driven workflow.
+
+
+% ========== START OF ADDED MATERIAL ==========
+\subsection{Systematic Literature Search}
+\label{subsec:systematic-search}
+
+Building upon the framework's capabilities for automated data analysis and code generation, this section extends its application to the critical research task of systematic literature search and integration. Systematic searching refers to the methodical process of comprehensively and accurately collecting all relevant studies on a specific research question according to a pre-defined search strategy. For quantitative social science researchers, efficiently discovering relevant literature, identifying methodological approaches, and extracting key findings are essential yet time-consuming components of the research workflow. The framework addresses this need by incorporating systematic search functionality that complements its configuration-driven analysis features, creating a more comprehensive research automation ecosystem.
+
+The framework includes capabilities for conducting systematic literature searches through an embedded domain-specific 
+language (eDSL) that abstracts away the syntactic and structural differences among academic database APIs. Rather than requiring 
+researchers to learn the specific query syntax of arXiv, PubMed, Crossref, Zenodo, and other repositories, the 
+\texttt{SystematicSearch} module provides a unified interface embedded within Python. This eDSL translates high-level search 
+specifications into database-specific API calls, handles authentication and pagination protocols that vary across platforms, 
+and normalizes heterogeneous result formats into a consistent data representation.
+
+The key architectural innovation lies in creating a common intermediate representation for search results. Each database returns 
+data in idiosyncratic formats with varying field names, date encodings, author representation schemes, and metadata structures. 
+The framework maps these diverse formats onto a standardized schema that preserves essential bibliographic information while 
+enabling uniform downstream processing. This abstraction ensures that analytical pipelines, citation extraction routines, and 
+export functions operate identically regardless of source database, eliminating the need for database-specific result handling code.
+
+\subsubsection{Search Query Construction}
+\label{subsubsec:search-query}
+
+A typical systematic search workflow begins with initializing a search session and defining relevant keywords. The eDSL 
+embedded in Python provides intuitive method calls that abstract database complexities, as illustrated in 
+Listing~\ref{lst:search-example}.
+\begin{figure}[!t]
+
+\begin{lstlisting}[
+  language=Python,
+  caption={Systematic literature search workflow using the \texttt{SystematicSearch} API},
+  label={lst:search-example},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+# Initialize systematic search object
+ss = SystematicSearch()
+
+# Begin a new search session
+ss.new_search()
+
+# Add keywords with logical operators
+ss.add_keyword("Quantitative Research")
+ss.add_keyword("Social Science", operator="AND")
+ss.add_keyword("Methodology", operator="OR")
+ss.add_keyword("Statistical Analysis", operator="OR")
+
+# Set additional search parameters
+ss.set_date_range("1986-01-01T00:00:00+00:00", 
+                  "2026-01-06T13:43:25.769270+00:00")
+ss.add_database("arXiv")
+ss.add_database("Zenodo")
+ss.add_database("Crossref")
+ss.add_database("SocArXiv")
+ss.add_database("OSF")
+ss.add_database("PubMed")
+
+# Inclusion criteria filtering is under development.
+# ss.add_inclusion_criteria("peer-reviewed")
+# ss.add_inclusion_criteria("English language")
+
+# Execute the search across configured databases
+results = ss.do_search()
+
+# Print a summary of search results
+ss.print_summary(max_results=50)
+
+# Export results in multiple formats
+ss.export_results("search_results.json")  # JSON format
+# Custom result serializer
+ss.current_search.save_to_file("paginated_results.csv", 
+                                CSVSerializer())
+\end{lstlisting}
+\end{figure}
+
+Behind this simple interface, the framework performs substantial translation work. When \texttt{add\_keyword} is called, 
+the system does not merely concatenate search terms. Instead, it constructs an abstract syntax tree representing the logical 
+structure of the query. The \texttt{do\_search} method then traverses this abstract representation and generates 
+database-specific query strings: for PubMed it constructs queries using 
+MeSH terms and field tags like \texttt{[Title/Abstract]}, 
+for arXiv it formats category restrictions and date ranges according to their API specification, 
+for Crossref it constructs 
+REST API filter parameters, and so forth. Each database receives a query optimized for its particular search engine while 
+expressing the same underlying information need.
+
+\subsubsection{Unified Data Representation}
+\label{subsubsec:unified-representation}
+
+The unified result representation becomes evident in the returned data structure. Regardless of whether a result originates 
+from PubMed's XML format, Crossref's JSON API, or arXiv's Atom feeds, the framework transforms 
+it into a consistent schema, as shown in Listings~\ref{lst:search-results-meta} and~\ref{lst:search-results-entries}.
+\begin{figure}[!t]
+
+\begin{lstlisting}[
+  caption={Search results metadata structure in unified JSON format},
+  label={lst:search-results-meta},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+{
+  "search_query": "Quantitative Research AND Social",
+  "timestamp": "2026-01-06T22:22:48.751351",
+  "statistics": {
+    "total_results": 275,
+    "databases_searched": ["arXiv", "Zenodo", "Crossref", 
+                           "SocArXiv", "OSF", "PubMed"],
+    "results_by_database": {
+      "arXiv": 50, 
+      "Crossref": 50, 
+      "PubMed": 50, 
+      "Zenodo": 25, 
+      "OSF": 50, 
+      "SocArXiv": 50
+    },
+    "date_range": {
+      "min": "1986-01-01T00:00:00+00:00",
+      "max": "2026-01-06T13:43:25.769270+00:00"
+    }
+  },
+  "results": [ ... ]
+}
+\end{lstlisting}
+
+\end{figure}
+
+
+Listing~\ref{lst:search-results-meta} shows the metadata structure containing search query information, execution timestamp, 
+and aggregate statistics across all queried databases. The \texttt{statistics} object provides a comprehensive overview of 
+search coverage, including the total number of results, which databases were queried, how many results each database returned, 
+and the temporal range of retrieved publications.
+
+\clearpage
+
+\begin{figure}[!t]
+
+\begin{lstlisting}[
+  caption={Individual search result entries in unified JSON format},
+  label={lst:search-results-entries},
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single
+]
+"results": [
+  {
+    "database": "Crossref",
+    "id": "10.4135/9781529682809.n8",
+    "title": "The Social Context of Quantitative Research",
+    "authors": [],
+    "abstract": null,
+    "publication_date": "2021-01-01T00:00:00",
+    "url": "https://doi.org/10.4135/9781529682809.n8",
+    "relevance_score": 4.0,
+    "source_data": {
+      "journal": "Beginning Quantitative Research",
+      "publisher": "SAGE Publications Ltd",
+      "type": "book-chapter"
+    }
+  },
+  {
+    "database": "Zenodo",
+    "id": "17842038",
+    "title": "APPLICATION OF QUANTITATIVE RESEARCH METHODS...",
+    "authors": ["Tursunov Muhammad"],
+    "abstract": "The application of quantitative research...",
+    "publication_date": "2025-12-06T00:00:00",
+    "url": "https://zenodo.org/record/17842038",
+    "relevance_score": 4.0,
+    "source_data": {
+      "resource_type": "publication:conferencepaper",
+      "keywords": ["Quantitative methods", "social sciences"],
+      "license": "cc-by-4.0"
+    }
+  },
+  ...
+]
+\end{lstlisting}
+\end{figure}
+
+Listing~\ref{lst:search-results-entries} demonstrates the structure of individual result entries within the \texttt{results} 
+array. Every result, regardless of source database, conforms to the same structural template with standardized field names: 
+\texttt{database} identifies the origin, \texttt{id} provides a unique identifier (which may be a DOI, PubMed ID, or 
+repository-specific code), \texttt{title}, \texttt{authors}, and \texttt{abstract} contain bibliographic information in 
+consistent formats, \texttt{publication\_date} uses ISO 8601 datetime encoding, \texttt{url} points to the canonical resource 
+location, and \texttt{source\_data} preserves database-specific metadata that may be useful for specialized processing.
+
+\subsubsection{Methodological Benefits and Integration}
+\label{subsubsec:search-benefits}
+
+This architectural decision—creating an \textit{embedded Domain Specific Language} (eDSL) with unified result representation—yields several methodological benefits. 
+First, it enables truly cross-database searches where a single query specification produces integrated results from multiple 
+sources, facilitating comprehensive literature coverage without manual reconciliation of diverse data formats. Second, it 
+supports reproducible search protocols: the same high-level query specification will generate appropriate database-specific 
+queries regardless of API changes, as only the translation layer requires updating rather than research code. Third, it 
+allows transparent extension to new databases: implementing a new adapter that maps from the database's native format to 
+the common schema immediately makes that database available to all existing analysis pipelines. Fourth, it enables 
+sophisticated result processing such as deduplication across databases, citation network analysis, and meta-analytic data 
+extraction using unified code that need not branch based on result provenance.
+
+The \texttt{new\_search} method initializes a search session with default parameters, establishing the scope and boundaries 
+of the literature search. The \texttt{add\_keyword} method constructs search queries by combining terms, with the system 
+automatically handling logical operators and field-specific searching based on database requirements. Researchers can specify 
+multiple keywords to refine search scope, with the framework managing query composition according to the syntax requirements 
+of target databases.
+
+The \texttt{do\_search} method executes the constructed query across configured academic repositories, returning a structured 
+collection of search results. The framework handles pagination, rate limiting, and API authentication transparently, enabling 
+researchers to focus on search strategy rather than implementation details. Results include bibliographic metadata such as 
+authors, publication year, journal or venue, abstract text, and unique identifiers that facilitate subsequent retrieval of 
+full-text articles.
+
+The \texttt{print\_summary} method generates a human-readable overview of search results, displaying key metadata for a 
+specified number of top results. This facilitates rapid assessment of search quality and relevance, enabling researchers 
+to iteratively refine search parameters before committing to full result processing. The \texttt{max\_results} parameter 
+limits output volume, preventing overwhelming display when searches return thousands of items.
+
+Export functionality enables persistence and sharing of search results through multiple formats. The \texttt{export\_results} 
+method serializes search results to JSON format, preserving complete metadata in a machine-readable structure suitable for 
+programmatic processing or integration with reference management software. The \texttt{save\_to\_file} method provides 
+customizable serialization through user-defined formatters, with the example demonstrating CSV export via a custom 
+\texttt{CSVSerializer} class. This extensibility allows researchers to generate outputs compatible with specific downstream 
+tools or analysis workflows.
+
+The systematic search functionality integrates with the broader framework architecture through shared data structures and 
+consistent design patterns. Search results can be automatically processed to extract relevant studies for inclusion in 
+literature reviews, with subsequent analysis configurations referencing retrieved articles. This integration supports 
+transparent and reproducible literature search procedures, addressing long-standing concerns about publication bias and 
+selective citation in quantitative research synthesis.

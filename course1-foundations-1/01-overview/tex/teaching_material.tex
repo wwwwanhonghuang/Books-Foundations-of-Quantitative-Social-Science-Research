@@ -1,0 +1,270 @@
+\documentclass[12pt,a4paper]{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{placeins}
+\usepackage{tabularx}
+	\usepackage{biblatex}
+\addbibresource{reference.bib} % Load your .bib file
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds,calc}
+\usepackage{rotating}
+
+\usepackage{tikz}
+% In your preamble (add if not already present)
+\usepackage{caption}
+\usepackage{listing}
+\usetikzlibrary{shapes, arrows.meta, positioning, fit}
+
+
+% Code listing settings
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false
+}
+
+% Custom boxes for teaching
+\newtcolorbox{keypoint}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title=Key Point
+}
+
+\newtcolorbox{example}{
+    colback=green!5!white,
+    colframe=green!75!black,
+    title=Example
+}
+
+\newtcolorbox{exercise}{
+    colback=orange!5!white,
+    colframe=orange!75!black,
+    title=Exercise
+}
+
+\newtcolorbox{warning}{
+    colback=red!5!white,
+    colframe=red!75!black,
+    title=Common Pitfall
+}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{Topic: \topicname}
+\cfoot{\thepage}
+
+% Document metadata - CUSTOMIZE THESE
+\newcommand{\coursename}{Foundations of Quantitative Social Science Research}
+\newcommand{\topicname}{Introduction}
+\newcommand{\lecturenum}{Lecture 1}
+\newcommand{\instructor}{Wanhong Huang}
+\newcommand{\semester}{Spring 2025}
+
+\title{\textbf{\coursename} \\ \lecturenum: \topicname}
+\author{\instructor}
+\date{\semester}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+
+%=============================================================================
+% SECTION 1: LEARNING OBJECTIVES
+%=============================================================================
+\section{Learning Objectives}
+
+By the end of this session, students will be able to:
+
+\begin{enumerate}
+    \item \textbf{Understand the complete research lifecycle in quantitative social science}
+    \begin{itemize}
+        \item Identify and describe the six stages of the quantitative research lifecycle: question discovery, research design, data collection, data processing, data analysis, and dissemination
+        \item Explain how these stages interconnect and iterate throughout a research project
+        \item Recognize stage-specific methodological considerations and challenges
+    \end{itemize}
+    
+    \item \textbf{Distinguish among major research schemes in quantitative social science}
+    \begin{itemize}
+        \item Characterize the distinctive features, advantages, and limitations of literature review and meta-analysis, experimental research, survey research, document and content analysis, and secondary data analysis
+        \item Match appropriate research schemes to specific research questions and contexts
+        \item Understand how different schemes instantiate the common research lifecycle with distinct emphases
+    \end{itemize}
+    
+    \item \textbf{Recognize the landscape of data analysis methods}
+    \begin{itemize}
+        \item Categorize major families of analytical methods: statistics-based, information theory-based, machine learning, network analysis, and interdisciplinary-integrated approaches
+        \item Identify representative techniques within each methodological tradition
+        \item Appreciate the complementary roles of different analytical approaches in addressing research questions
+    \end{itemize}
+    
+    \item \textbf{Identify key challenges in contemporary quantitative social science research}
+    \begin{itemize}
+        \item Articulate the problem of data and tool fragmentation across methodological traditions and software ecosystems
+        \item Explain research lifecycle discontinuity and its implications for workflow efficiency and information propagation
+        \item Describe structural reproducibility deficits arising from inadequate documentation infrastructure
+        \item Recognize steep learning curves resulting from insufficient abstraction in current tools
+        \item Understand data heterogeneity and scale challenges in modern multi-source, multimodal research
+    \end{itemize}
+    
+    \item \textbf{Envision requirements for an integrative computational research framework}
+    \begin{itemize}
+        \item Understand how unified data architecture addresses heterogeneity and scale challenges
+        \item Recognize the role of standardized workflow abstractions in supporting lifecycle continuity
+        \item Appreciate integrated analytical methods as solutions to tool fragmentation
+        \item Explain how computational reproducibility infrastructure enables verification and extension of research
+        \item Identify opportunities for intelligent assistance and progressive abstraction to reduce learning barriers
+    \end{itemize}
+    
+    \item \textbf{Develop critical awareness of research infrastructure and tools}
+    \begin{itemize}
+        \item Evaluate current tools and platforms in terms of their support for different research lifecycle stages
+        \item Recognize trade-offs between flexibility and usability, specialization and integration
+        \item Understand visualization and reporting tools appropriate for different audiences and purposes
+        \item Appreciate the importance of reproducibility tools including code repositories, computational notebooks, and containerization
+    \end{itemize}
+\end{enumerate}
+
+
+%=============================================================================
+% SECTION 2: OVERVIEW
+%=============================================================================
+\section{Overview}
+
+This introductory session provides a comprehensive map of the quantitative social science research landscape, establishing foundational concepts and frameworks that will guide subsequent course content. We approach quantitative social science as a systematic enterprise characterized by a common research lifecycle, diverse research schemes that instantiate this lifecycle in distinct ways, and an expanding repertoire of analytical methods and computational tools.
+
+\subsection*{The Research Lifecycle Framework}
+
+We begin by establishing the six-stage research lifecycle as our organizing framework: (1) question discovery, where research problems emerge from literature gaps, theoretical puzzles, or empirical observations; (2) research design, where abstract questions are operationalized into feasible empirical investigations; (3) data collection, where information is systematically gathered through instruments and procedures appropriate to the research design; (4) data processing, where raw data are cleaned, transformed, and prepared for analysis; (5) data analysis, where statistical and computational methods are applied to answer research questions; and (6) dissemination, where findings are communicated to scholarly and broader audiences.
+
+This lifecycle is not strictly linear but iterative and recursive. Insights from data processing may reveal the need to refine research designs; preliminary analyses may suggest additional data collection; dissemination feedback may inspire new questions. Understanding this iterative character is essential for realistic research planning and execution.
+
+\subsection*{Research Schemes as Lifecycle Instantiations}
+
+Quantitative social science encompasses multiple research schemes, each representing a distinctive approach to empirical investigation. We examine five major schemes:
+
+\textbf{Literature review and meta-analysis} systematically synthesize existing research to identify patterns, assess evidence quality, and quantify cumulative effects across studies. These schemes require specialized skills in systematic search, quality assessment, effect size extraction, and statistical aggregation.
+
+\textbf{Experimental research} manipulates independent variables to establish causal relationships under controlled conditions. This includes laboratory experiments with maximum control, field experiments balancing control with ecological validity, and quasi-experiments exploiting natural variation or policy changes.
+
+\textbf{Survey research} collects self-reported data from samples to describe populations or test hypotheses about relationships among variables. Survey schemes involve careful questionnaire design, sampling strategy selection, and attention to measurement validity and reliability.
+
+\textbf{Document and content analysis} systematically examines textual, visual, or multimedia materials to identify patterns, extract information, or test hypotheses about communication and meaning. Modern approaches increasingly integrate computational text analysis with traditional interpretive methods.
+
+\textbf{Secondary data analysis} repurposes existing datasets—often large-scale administrative records, archived surveys, or digital trace data—for new research questions. This scheme offers efficiency and scale but requires careful attention to data provenance, measurement validity, and appropriate inference given the original data collection context.
+
+Each scheme instantiates the research lifecycle with distinct methodological emphases: experiments prioritize internal validity through randomization and control; surveys prioritize external validity through representative sampling; content analysis prioritizes systematic coding and intercoder reliability; secondary analysis prioritizes appropriate inference given non-researcher-designed data.
+
+\subsection*{The Analytical Methods Landscape}
+
+Contemporary quantitative social science draws on an increasingly diverse repertoire of analytical methods spanning multiple traditions:
+
+\textbf{Statistics-based methods} include classical hypothesis testing, regression modeling, multilevel models for nested data, time series analysis for temporal dependencies, structural equation modeling for latent constructs, and causal inference frameworks including matching, instrumental variables, regression discontinuity, and difference-in-differences.
+
+\textbf{Information theory-based methods} quantify uncertainty, complexity, and information flow using entropy measures, mutual information, and complexity metrics, providing alternative foundations for pattern detection and model evaluation.
+
+\textbf{Machine learning methods} encompass supervised learning for prediction, unsupervised learning for pattern discovery, deep learning for complex representations, ensemble methods for robust prediction, and increasingly, methods specifically designed for causal inference from observational data.
+
+\textbf{Network analysis} employs graph-theoretic algorithms to characterize relational structures, identify influential actors, detect communities, and model diffusion processes across social, information, or other networks.
+
+\textbf{Interdisciplinary-integrated methods} combine approaches across traditions, including computational social science methods, natural language processing for text analysis, and mixed-methods integration of quantitative and qualitative approaches.
+
+Understanding this landscape enables researchers to select methods appropriate to their research questions, data structures, and inferential goals rather than defaulting to familiar techniques or those dictated by available software.
+
+\subsection*{Five Core Challenges in Current Practice}
+
+Despite methodological sophistication, quantitative social science faces persistent challenges rooted in inadequate computational infrastructure:
+
+\textbf{Data and tool fragmentation} forces researchers to learn multiple disconnected software ecosystems, each with incompatible data structures and workflows. A single project may require reference managers, survey platforms, statistical packages, machine learning frameworks, network analysis tools, and manuscript preparation software, with substantial effort invested in data translation and format conversion.
+
+\textbf{Research lifecycle discontinuity} emerges from lack of integrated support spanning all six stages. Information created in early stages—variable definitions, sampling decisions, quality assessments—rarely propagates automatically to later stages, creating opportunities for errors and obscuring connections between questions, methods, and results.
+
+\textbf{Structural reproducibility deficits} stem from inadequate workflow documentation and decision-tracking infrastructure. Contemporary research involves numerous methodological choices, but current tools provide limited systematic mechanisms for recording, versioning, and linking decisions to results, making reproduction challenging even for original researchers.
+
+\textbf{Steep learning curves from insufficient abstraction} create barriers to sophisticated analysis. Existing tools typically offer either limited point-and-click interfaces or powerful but complex programming environments, with few intermediate abstraction layers that would hide unnecessary complexity while preserving analytical rigor.
+
+\textbf{Data heterogeneity and scale challenges} intensify as research increasingly involves multi-source data integration, multimodal data encompassing text, images, networks, and sensor streams, and datasets growing from thousands to millions of observations. Current specialized tools rarely provide the flexible data architecture and computational scalability such research demands.
+
+\subsection*{Toward an Integrative Computational Research Framework}
+
+These challenges point toward requirements for an integrative computational research framework providing:
+
+\begin{itemize}
+    \item \textbf{Unified data architecture} supporting flexible representation of structured, unstructured, relational, spatial, temporal, and hierarchical data while preserving metadata and provenance
+    \item \textbf{Standardized workflow abstractions} formalizing lifecycle patterns across schemes with machine-readable, version-controlled, shareable specifications
+    \item \textbf{Integrated analytical methods} offering consistent interfaces to diverse methodological traditions, reducing tool fragmentation
+    \item \textbf{Computational reproducibility infrastructure} tracking code, data transformations, decisions, and dependencies throughout the analytical process
+    \item \textbf{Intelligent assistance and progressive abstraction} leveraging AI to support literature synthesis, content analysis, and manuscript preparation while offering multiple interaction modes from graphical to programmatic
+\end{itemize}
+
+Such a framework would support the complete research lifecycle across diverse schemes, reducing barriers to sophisticated analysis while enhancing transparency, reproducibility, and cumulative knowledge building. This vision motivates our ongoing efforts in developing concrete architectural designs and prototype implementations, which subsequent sessions will examine in detail.
+
+\subsection*{Session Structure}
+
+This session proceeds as follows: We first present a detailed overview of the research lifecycle, examining each stage's characteristic activities, decisions, and challenges. We then survey major research schemes, highlighting how each instantiates the lifecycle with distinct methodological priorities. Next, we review the landscape of analytical methods across statistical, information-theoretic, machine learning, network, and interdisciplinary traditions. We examine visualization and reporting tools for presenting research findings to diverse audiences. Finally, we synthesize these elements to articulate the five core challenges and motivate requirements for an integrative computational research framework.
+
+Throughout, we emphasize connections among concepts, preparing students to understand subsequent course content on research question formation, research design dimensions, specific analytical methods, and computational implementation strategies. The goal is not comprehensive coverage of all methods and tools—subsequent sessions will provide depth—but rather establishing a conceptual map of the quantitative social science research enterprise and its current limitations and future possibilities.
+
+
+
+\input{partials/2_A_Comprehensive_Overview_of_Quantitative_Social_Science_Research.tex}
+
+\printbibliography % This generates the reference list
+
+
+%=============================================================================
+% APPENDIX (Optional)
+%=============================================================================
+\appendix
+% \section{Additional Materials}
+
+% \subsection{Mathematical Derivations}
+% Detailed proofs and derivations for interested students.
+
+% \subsection{Extended Code Examples}
+% Complete implementations and additional examples.
+
+% \subsection{Dataset Information}
+% Information about datasets used in examples and exercises.
+
+\end{document}

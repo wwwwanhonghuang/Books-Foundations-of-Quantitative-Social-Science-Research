@@ -1,0 +1,204 @@
+\documentclass[12pt,a4paper]{article}
+
+%=============================================================================
+% PACKAGES
+%=============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{placeins}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds,calc}
+\usepackage{rotating}
+\usepackage{cite}  
+\usepackage{xeCJK}            % for XeLaTeX
+\setCJKmainfont{Noto Sans CJK SC}     
+%=============================================================================
+% LISTINGS
+%=============================================================================
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    breaklines=true
+}
+
+%=============================================================================
+% TCOLORBOX ENVIRONMENTS
+%=============================================================================
+\newtcolorbox{keypoint}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title=Key Point
+}
+
+%=============================================================================
+% HEADER / FOOTER
+%=============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{Topic: \topicname}
+\cfoot{\thepage}
+
+%=============================================================================
+% METADATA
+%=============================================================================
+\newcommand{\coursename}{Foundations of Quantitative Social Science Research}
+\newcommand{\topicname}{Data Collection}
+\newcommand{\lecturenum}{Lecture 6--7}
+\newcommand{\instructor}{Wanhong Huang}
+\newcommand{\semester}{Spring 2025}
+
+\title{\textbf{\coursename} \\ \lecturenum: \topicname}
+\author{\instructor}
+\date{\semester}
+
+%=============================================================================
+% DOCUMENT
+%=============================================================================
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%=============================================================================
+% 1. INTRODUCTION
+%=============================================================================
+\section{Introduction}
+
+
+%% add the arrangement: the major area of philosophy: ontology, epistemology, ethics and moral, beauty
+
+
+% \begin{keypoint}
+% Data collection is not merely a technical procedure but a philosophically structured practice in which ontological commitments,
+% epistemic assumptions, methodological choices, and ethical constraints are materially instantiated.
+% \end{keypoint}
+
+% Role of data collection in the research lifecycle
+% Motivation for ontology / epistemology / methodology framing
+\input{partials/2_ontology.tex}
+% \section{Introduction}
+% \textit{Section omitted.}
+
+% \section{Ontology of Social Fact and Data}
+% \textit{Section omitted.}
+
+\input{partials/3_epistemology.tex}
+
+
+%=============================================================================
+% 4. METHODOLOGICAL DESIGN OF DATA COLLECTION
+%=============================================================================
+\section{Methodological Design of Data Collection}
+
+\subsection{Population Definition and Sampling}
+% Target vs accessible population
+% Probability and non-probability sampling
+
+\subsection{Recruitment and Participation}
+% Incentives
+% Trust and engagement
+% Longitudinal retention
+
+\subsection{Modes of Data Collection}
+% Surveys, interviews, observation
+% Automated and digital collection
+% Mode effects
+
+\subsection{Instruments and Protocols}
+% Questionnaires
+% Sensors and logs
+% Standardization and training
+
+\subsection{Survey and Psychometric Design}
+% Question wording
+% Scales and indices
+% Reliability and factor structure
+
+\subsection{Pilot Testing and Iterative Refinement}
+% Pretests
+% Cognitive interviewing
+% Adaptive redesign
+
+%=============================================================================
+% 5. ETHICS AND GOVERNANCE OF DATA COLLECTION
+%=============================================================================
+\section{Ethics and Governance of Data Collection}
+
+\subsection{Informed Consent and Participant Rights}
+% Voluntariness
+% Withdrawal
+% Vulnerable populations
+
+\subsection{Privacy, Anonymization, and Data Security}
+% De-identification
+% Re-identification risk
+% Secure storage
+
+\subsection{Regulatory and Institutional Frameworks}
+% IRB
+% GDPR
+% Jurisdictional variation
+
+\subsection{Power, Positionality, and Responsibility}
+% Extractive vs participatory research
+% Reflexivity
+
+\subsection{Indigenous Data Sovereignty and Collective Rights}
+% CARE principles
+% Community governance
+
+%=============================================================================
+% 6. INFRASTRUCTURE, PROVENANCE, AND REPRODUCIBILITY
+%=============================================================================
+\section{Infrastructure, Provenance, and Reproducibility}
+
+\subsection{Metadata and Documentation}
+% Codebooks
+% DDI, Dublin Core, FAIR
+
+\subsection{Data Formats and Storage Systems}
+% CSV, JSON, Parquet
+% Relational vs NoSQL
+
+\subsection{Provenance and Version Control}
+% Data lineage
+% Transformations
+% Git and audit trails
+
+\subsection{Transparency and Reproducible Practice}
+% Pre-registration
+% Replication files
+% Open data norms
+
+%=============================================================================
+% 7. CONCLUSION
+%=============================================================================
+\section{Conclusion}
+
+% Data collection as a socially embedded, theory-laden practice
+% Implications for quantitative research
+% Emerging challenges: big data, AI, automation
+
+
+\bibliographystyle{unsrt}  % numbered in order of citation
+\bibliography{references}
+
+\end{document}

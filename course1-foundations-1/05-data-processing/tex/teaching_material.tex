@@ -1,0 +1,474 @@
+\documentclass[12pt,a4paper]{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{placeins}
+\usepackage{tabularx}
+\usepackage{xeCJK}            % for XeLaTeX
+\setCJKmainfont{SimSun}       % or another Chinese font you have installed
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds,calc}
+\usepackage{rotating}
+
+
+% Code listing settings
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false
+}
+
+% Custom boxes for teaching
+\newtcolorbox{keypoint}{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    title=Key Point
+}
+
+\newtcolorbox{example}{
+    colback=green!5!white,
+    colframe=green!75!black,
+    title=Example
+}
+
+\newtcolorbox{exercise}{
+    colback=orange!5!white,
+    colframe=orange!75!black,
+    title=Exercise
+}
+
+\newtcolorbox{warning}{
+    colback=red!5!white,
+    colframe=red!75!black,
+    title=Common Pitfall
+}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{Topic: \topicname}
+\cfoot{\thepage}
+
+% Document metadata - CUSTOMIZE THESE
+\newcommand{\coursename}{Foundations of Quantitative Social Science Research}
+\newcommand{\topicname}{Data Processing}
+\newcommand{\lecturenum}{Lecture 7-8}
+\newcommand{\instructor}{Wanhong Huang}
+\newcommand{\semester}{Spring 2025}
+
+\title{\textbf{\coursename} \\ \lecturenum: \topicname}
+\author{\instructor}
+\date{\semester}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+
+%=============================================================================
+% SECTION 1: LEARNING OBJECTIVES
+%=============================================================================
+\section{Learning Objectives}
+
+By the end of this session, students will be able to:
+
+\begin{enumerate}
+    \item Understand the foundational logic of quantitative social science research, including the full research lifecycle from question formulation to interpretation and dissemination.
+    \item Distinguish major research schemes (e.g., experimental, quasi-experimental, and observational designs) and explain how their structural dimensions constrain measurement, comparison, and inference.
+    \item Critically evaluate the identification assumptions underlying different quantitative methods, and assess their plausibility in applied research settings.
+    \item Select and justify appropriate measurement strategies and confounding control techniques for their own research questions.
+\end{enumerate}
+
+%=============================================================================
+% SECTION 2: OVERVIEW
+%=============================================================================
+\section{Overview}
+
+\begin{keypoint}
+Quantitative social science research is not defined by individual methods or tools, but by coherent design choices that link 
+research questions, data, methods, and assumptions across the entire research lifecycle.
+\end{keypoint}
+
+This session introduces a unified framework for understanding quantitative social science research as an integrated process 
+rather than a collection of isolated techniques. We examine how classical research 
+designs (such as randomized experiments, cohort studies, and panel designs) and modern 
+approaches (including digital trace analysis and adaptive designs) can be systematically compared along shared 
+dimensions such as intervention structure, temporal organization, comparison logic, and confounding control.
+
+Rather than focusing on algorithmic details, the emphasis is placed on methodological reasoning: how design choices encode 
+assumptions, how measurement modalities shape inference, and how different research schemes achieve (or fail to achieve) 
+credible causal and descriptive claims. This perspective provides students with a conceptual map that supports both critical 
+reading of empirical studies and principled design of their own quantitative research projects.
+
+
+\section{Introduction}
+% The role of data processing in the research pipeline
+% From raw data to analysis-ready data
+% Iterative nature of processing and quality assessment
+
+%% ============================================================ %%
+%% PART I: FOUNDATIONS OF DATA PROCESSING                       %%
+%% ============================================================ %%
+
+\section{The Nature and Goals of Data Processing}
+
+\subsection{Raw Data vs. Processed Data: Ontological Status}
+% What counts as "raw" data? (Gitelman: "Raw Data is an Oxymoron")
+% Processing as transformation vs. processing as revelation
+% The constructed nature of "analysis-ready" data
+
+\subsection{Processing as Interpretation: Epistemological Considerations}
+% Every processing decision is a theoretical choice
+% Transparency and documentation of transformations
+% Reversibility and preservation of original data
+
+\subsection{The Processing Pipeline: Workflow Design}
+% Stages from ingestion to analysis-ready datasets
+% Modular vs. monolithic processing approaches
+% Reproducibility and version control in processing
+
+\subsection{Quality Assessment Throughout Processing}
+% When and how to evaluate data quality
+% Iterative refinement based on quality metrics
+% Balancing automation with human judgment
+
+
+%% ============================================================ %%
+%% PART II: DATA CLEANING AND VALIDATION                        %%
+%% ============================================================ %%
+
+\section{Data Cleaning: Errors and Inconsistencies}
+
+\subsection{Types of Data Quality Issues}
+% Syntax errors, semantic errors, coverage errors
+% Duplicates, outliers, and anomalies
+% Inconsistencies within and across sources
+
+\subsection{Missing Data: Detection and Assessment}
+% Patterns of missingness (MCAR, MAR, NMAR)
+% Diagnostic tools and visualization
+% Documentation of missingness
+
+\subsection{Missing Data: Treatment Strategies}
+% Deletion methods (listwise, pairwise)
+% Imputation approaches (mean, regression, multiple imputation, ML-based)
+% When to impute vs. when to retain missingness
+% Sensitivity analysis for imputation choices
+
+\subsection{Outlier Detection and Treatment}
+% Statistical methods (z-scores, IQR, Mahalanobis distance)
+% Model-based approaches (isolation forests, autoencoders)
+% Domain knowledge vs. statistical criteria
+% Winsorizing, trimming, and transformation approaches
+
+\subsection{Duplicate Detection and Resolution}
+% Exact vs. fuzzy matching
+% Record linkage and entity resolution
+% Merge/purge strategies
+
+
+\section{Data Validation and Integrity Checking}
+
+\subsection{Constraint Verification}
+% Checking integrity constraints (from collection chapter)
+% Range checks, format validation, cross-field validation
+% Referential integrity across related datasets
+
+\subsection{Logical Consistency Checks}
+% Internal consistency within records
+% Temporal consistency (impossible sequences)
+% Cross-source consistency validation
+
+\subsection{Statistical Profiling}
+% Univariate distributions and summary statistics
+% Bivariate relationships and correlation analysis
+% Identifying unexpected patterns
+
+\subsection{Data Quality Metrics and Reporting}
+% Completeness, accuracy, consistency, timeliness
+% Quality scorecards and dashboards
+% Communicating data quality to stakeholders
+
+
+%% ============================================================ %%
+%% PART III: REPRESENTATION AND TRANSFORMATION                  %%
+%% ============================================================ %%
+
+\section{Data Representation Transformations}
+
+\subsection{Type Conversions and Casting}
+% Numeric, categorical, temporal, textual conversions
+% Loss of information in conversions
+% Safe vs. unsafe transformations
+
+\subsection{Encoding Categorical Variables}
+% One-hot encoding, dummy coding, effect coding
+% Ordinal encoding and target encoding
+% Handling high-cardinality categoricals
+
+\subsection{Temporal Data Processing}
+% Date/time parsing and standardization
+% Time zone handling and UTC conventions
+% Temporal aggregation and resampling
+% Creating temporal features (day of week, seasonality)
+
+\subsection{Text Preprocessing}
+% Tokenization, stemming, lemmatization
+% Stop word removal and normalization
+% Character encoding issues (UTF-8, etc.)
+
+\subsection{Normalization and Standardization}
+% Min-max scaling, z-score standardization, robust scaling
+% When and why to normalize
+% Preserving statistical properties
+
+
+\section{Structural Transformations}
+
+\subsection{Reshaping: Wide vs. Long Formats}
+% Pivoting and melting operations
+% Tidy data principles (Wickham)
+% When to use each format
+
+\subsection{Aggregation and Disaggregation}
+% Grouping and summary operations
+% Level of analysis considerations
+% Ecological fallacy and Simpson's paradox
+
+\subsection{Derived Variables and Feature Engineering}
+% Creating computed fields
+% Ratio variables and interaction terms
+% Domain-specific feature creation
+
+\subsection{Binning and Discretization}
+% Equal-width vs. equal-frequency binning
+% Optimal binning algorithms
+% Information loss in discretization
+
+
+%% ============================================================ %%
+%% PART IV: FEATURE EXTRACTION AND DIMENSIONALITY               %%
+%% ============================================================ %%
+
+\section{Feature Extraction from Structured Data}
+
+\subsection{Statistical Feature Extraction}
+% Moments, quantiles, distributional summaries
+% Time series features (autocorrelation, trend, seasonality)
+% Network features (centrality, clustering coefficient)
+
+\subsection{Dimensionality Reduction: Linear Methods}
+% Principal Component Analysis (PCA)
+% Factor Analysis
+% Linear Discriminant Analysis (LDA)
+% Interpretability and explained variance
+
+\subsection{Dimensionality Reduction: Nonlinear Methods}
+% Manifold learning (t-SNE, UMAP, Isomap)
+% Autoencoders and deep feature learning
+% When nonlinear methods are appropriate
+
+\subsection{Feature Selection}
+% Filter methods (correlation, mutual information)
+% Wrapper methods (recursive feature elimination)
+% Embedded methods (L1 regularization, tree-based importance)
+% Balancing parsimony with predictive power
+
+
+\section{Feature Extraction from Unstructured Data}
+
+\subsection{Text Feature Extraction}
+% Bag-of-words and TF-IDF
+% Word embeddings (Word2Vec, GloVe, fastText)
+% Contextual embeddings (BERT, transformers)
+% Topic modeling (LDA, NMF)
+
+\subsection{Image Feature Extraction}
+% Traditional computer vision (SIFT, HOG, color histograms)
+% Deep learning features (CNNs, pretrained models)
+% Object detection and segmentation
+% Spatial features and image statistics
+
+\subsection{Audio and Video Feature Extraction}
+% Spectral features (MFCCs, spectrograms)
+% Temporal features and rhythm
+% Video frame sampling and shot detection
+% Multimodal features from audiovisual data
+
+\subsection{Network and Graph Features}
+% Node-level features (degree, centrality, clustering)
+% Edge-level features (weight, direction, attributes)
+% Graph-level features (density, modularity, motifs)
+% Graph embeddings (Node2Vec, GraphSAGE)
+
+
+%% ============================================================ %%
+%% PART V: DATA INTEGRATION AND FUSION                          %%
+%% ============================================================ %%
+
+\section{Data Integration Across Sources}
+
+\subsection{Schema Integration and Harmonization}
+% Resolving naming conflicts and semantic heterogeneity
+% Ontology alignment and mapping
+% Creating unified data models
+
+\subsection{Record Linkage and Entity Resolution}
+% Deterministic vs. probabilistic matching
+% Blocking and indexing strategies
+% Fellegi-Sunter model and match scoring
+% Handling one-to-many and many-to-many relationships
+
+\subsection{Data Fusion and Conflation}
+% Combining overlapping information from multiple sources
+% Conflict resolution strategies
+% Provenance tracking in merged datasets
+% Quality-weighted integration
+
+\subsection{Temporal Integration}
+% Aligning time series from different sources
+% Handling different sampling rates and time scales
+% Interpolation and resampling strategies
+% Time synchronization across sensors
+
+
+\section{Multimodal Data Integration}
+
+\subsection{Theoretical Foundations of Multimodal Integration}
+% What constitutes a "modality"?
+% Complementarity vs. redundancy across modalities
+% Early fusion vs. late fusion strategies
+% The alignment problem across modalities
+
+\subsection{Aligning Heterogeneous Data Types}
+% Spatial alignment (coordinate systems, projections)
+% Temporal alignment (event synchronization)
+% Semantic alignment (concept mapping)
+% Statistical alignment (canonical correlation analysis)
+
+\subsection{Multimodal Representation Learning}
+% Joint embeddings across modalities
+% Cross-modal translation and transfer
+% Attention mechanisms for multimodal fusion
+% Handling missing modalities
+
+\subsection{Domain-Specific Integration Challenges}
+% Text + images (vision-language models)
+% Audio + video + text (multimedia analysis)
+% Sensor + survey + administrative data
+% Biological + behavioral + self-report data
+% Geospatial + temporal + attribute data
+
+
+%% ============================================================ %%
+%% PART VI: INFRASTRUCTURE AND BEST PRACTICES                   %%
+%% ============================================================ %%
+
+\section{Processing Infrastructure and Scalability}
+
+\subsection{Computational Considerations}
+% In-memory vs. out-of-core processing
+% Parallel and distributed processing (MapReduce, Spark)
+% GPU acceleration for specific operations
+% Storage and I/O optimization
+
+\subsection{Pipeline Orchestration}
+% Workflow management systems (Airflow, Prefect, Nextflow)
+% Dependency management and task scheduling
+% Error handling and retry logic
+% Monitoring and logging
+
+\subsection{Data Versioning and Lineage}
+% Tracking data transformations (DVC, MLflow)
+% Reproducible processing pipelines
+% Branching and experimentation
+% Provenance documentation (PROV-O, W3C standards)
+
+\subsection{Testing and Validation in Processing}
+% Unit tests for transformation functions
+% Integration tests for pipelines
+% Data validation frameworks (Great Expectations, Pandera)
+% Regression testing for pipeline changes
+
+
+\section{Documentation and Communication}
+
+\subsection{Processing Documentation Standards}
+% Codebooks for processed variables
+% Transformation logs and decision records
+% Data dictionaries and metadata
+% README files and processing reports
+
+\subsection{Visualization for Understanding Processing}
+% Visualizing data quality issues
+% Before/after comparisons
+% Distribution changes through processing
+% Missing data patterns
+
+\subsection{Communicating Processing Decisions}
+% Justifying choices to stakeholders
+% Sensitivity analyses and robustness checks
+% Transparency about limitations
+% Version histories and changelogs
+
+
+\section{Conclusion}
+% Processing as craft: balancing automation with judgment
+% The ethics of data processing choices
+% Common pitfalls and how to avoid them
+% Forward look: AutoML, neural data processing, end-to-end learning
+
+
+%=============================================================================
+% APPENDIX (Optional)
+%=============================================================================
+\appendix
+% \section{Additional Materials}
+
+% \subsection{Mathematical Derivations}
+% Detailed proofs and derivations for interested students.
+
+% \subsection{Extended Code Examples}
+% Complete implementations and additional examples.
+
+% \subsection{Dataset Information}
+% Information about datasets used in examples and exercises.
+
+\end{document}

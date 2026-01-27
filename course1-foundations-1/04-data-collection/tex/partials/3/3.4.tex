@@ -1,0 +1,476 @@
+
+\subsection{Bias, Missingness, and Data Quality Threats}
+
+Beyond measurement error in data we possess, systematic threats to data quality 
+arise from biased sampling and missing data. These threats can fundamentally 
+compromise inference even when available data are measured perfectly. We must 
+understand how data come to be present or absent in our datasets and what this 
+implies for knowledge claims.
+
+\subsubsection{Selection Bias}
+
+\textbf{Selection bias} occurs when the process determining which units are 
+included in data is systematically related to variables of interest, particularly 
+outcomes. This makes observed samples systematically unrepresentative of 
+populations or processes we aim to understand~\cite{heckman1979sample}.
+
+\textit{Sampling selection bias} arises when sampling is not random or when 
+target populations are poorly defined. Convenience samples of readily available 
+subjects (college students, online respondents, voluntary participants) differ 
+systematically from broader populations. Telephone surveys exclude those 
+without phones. Online surveys exclude those without internet access. Historical 
+records preserve information about elites more than commoners. Administrative 
+data reflect only cases that came to official attention.
+
+Each sampling frame defines a population, but this population may not be the 
+theoretically relevant one. Studies of "public opinion" based on landline 
+telephone surveys increasingly sample an older, more rooted population as 
+younger people abandon landlines. Studies of organizational behavior using 
+publicly traded companies miss privately held firms. Cross-national analyses 
+using available data oversample rich, stable democracies.
+
+\textit{Self-selection bias} occurs when individuals or units decide whether 
+to participate, and this decision correlates with outcomes. Volunteers for 
+studies differ from non-volunteers. Survey respondents differ from non-respondents. 
+People who seek treatment differ from those who don't. Organizations that 
+publicize data differ from those that keep information private.
+
+This is particularly problematic for causal inference. If healthier people 
+seek medical treatment more readily, comparing treated to untreated patients 
+confounds treatment effects with pre-existing health differences. If motivated 
+students select into programs, comparing participants to non-participants 
+confounds program effects with motivation. Randomized experiments eliminate 
+selection into treatment, but even experiments face selection into study 
+participation.
+
+\textit{Survival bias} occurs when selection depends on survival or continued 
+existence. Studies of successful organizations miss those that failed and 
+exited the sample. Historical analyses using surviving records miss events 
+whose documentation was destroyed. Financial data from active firms miss 
+bankruptcies. Medical studies lose patients who die or become too ill to 
+continue.
+
+Survival bias can badly distort inference. During World War II, military 
+planners initially proposed reinforcing aircraft armor where returning planes 
+showed damage. Statistical analyst Abraham Wald recognized survival bias: 
+damage patterns on returning planes indicated where aircraft could survive 
+hits. Areas showing no damage were where hits caused planes to crash, so 
+those areas needed reinforcement~\cite{mangel2003aviation}.
+
+\textit{Truncation and censoring} occur when only portions of distributions 
+are observable. Truncation completely excludes observations beyond thresholds: 
+studying college graduates excludes those who didn't attend college. Censoring 
+observes that values exceed thresholds without knowing exact values: knowing 
+income exceeds \$150,000 without knowing how much.
+
+These create biased estimates of population parameters if not properly modeled. 
+Studying determinants of success using only successful cases may 
+miss factors that prevent success. Studying conflict duration using only 
+completed conflicts may misestimate dynamics of ongoing conflicts.
+
+\textbf{Addressing selection bias} requires understanding and modeling the 
+selection process:
+
+\textit{Weighted sampling} gives observations differential weights inversely 
+proportional to selection probabilities, making samples representative if 
+selection probabilities are known.
+
+\textit{Heckman selection models} explicitly model selection into the sample 
+as a function of observables, correcting estimates for selection bias under 
+assumptions about error structure~\cite{heckman1979sample}.
+
+\textit{Instrumental variables} identify exogenous sources of variation in 
+selection or treatment assignment, enabling causal inference under exclusion 
+restrictions.
+
+\textit{Matching and reweighting} make samples comparable on observables, 
+reducing selection bias if selection depends only on measured covariates.
+
+However, all these approaches require assumptions—typically that selection 
+depends only on observed variables or that instruments satisfy exclusion 
+restrictions. When selection depends on unobservables, bias may be intractable 
+without strong theory or external data on selection processes.
+
+\subsubsection{Mechanisms of Missingness}
+
+Missing data are pervasive in social science. Surveys have non-response. 
+Longitudinal studies experience attrition. Administrative records are 
+incomplete. Merged datasets have partial coverage. How we handle missing 
+data profoundly affects inference, but appropriate methods depend on why 
+data are missing~\cite{rubin1976inference, little2019statistical}.
+
+The \textbf{missing data mechanism} describes the relationship between 
+missingness and observed and unobserved variables. Rubin's taxonomy 
+distinguishes three types:
+
+\textbf{Missing Completely At Random (MCAR)} means missingness is independent 
+of both observed and unobserved variables. Observations are missing through 
+purely random processes unrelated to anything else. For example, if equipment 
+randomly fails, creating gaps in time series, this might be MCAR. If 
+questionnaires are randomly lost in the mail, responses are MCAR.
+
+Under MCAR, observed data are a random subsample of complete data. Missingness 
+reduces statistical power (fewer observations) but does not bias estimates. 
+Complete-case analysis (deleting observations with any missing values) yields 
+unbiased estimates, though at the cost of reduced precision.
+
+MCAR is extremely strong and rarely holds in practice. Missingness usually 
+relates to something, even if only weakly or indirectly.
+
+\textbf{Missing At Random (MAR)} means missingness depends on observed variables 
+but is conditionally independent of unobserved variables. After controlling 
+for observed data, missingness is random with respect to missing values.
+
+For example, if survey response rates differ by age and gender (observed) 
+but, within age-gender groups, response is unrelated to unobserved attitudes, 
+then missingness is MAR. If wealthier respondents more readily disclose income 
+(unobserved) but wealth correlates with education (observed), then conditioning 
+on education makes missingness MAR.
+
+Under MAR, complete-case analysis is generally biased because observed cases 
+are not representative of the full sample. However, MAR allows unbiased 
+estimation through methods that model missingness conditional on observables:
+
+\textit{Multiple imputation} generates multiple plausible values for missing 
+data based on observed data, estimates models on each imputed dataset, and 
+combines results accounting for uncertainty from imputation~\cite{rubin2004multiple}.
+
+\textit{Maximum likelihood} directly estimates parameters using all available 
+information, accounting for different patterns of observed data across cases.
+
+\textit{Inverse probability weighting} weights complete cases inversely 
+proportional to their probability of being observed, making the weighted 
+sample representative under MAR.
+
+MAR is still an assumption that cannot be directly tested from observed data 
+alone, since it involves claims about the relationship between missingness 
+and unobserved values. Sensitivity analyses examine how conclusions change 
+if MAR is violated.
+
+\textbf{Missing Not At Random (MNAR)} means missingness depends on unobserved 
+values even after conditioning on observed data. The probability that data 
+are missing is related to what the missing values would have been.
+
+For example, if people with very high or very low income are less likely to 
+disclose income, and this remains true even after controlling for all observed 
+variables, then income data are MNAR. If patients drop out of medical studies 
+because of adverse treatment effects not captured in observed covariates, 
+attrition is MNAR.
+
+MNAR is the most problematic missing data mechanism because missingness 
+itself is informative. The pattern of missing data tells us something about 
+unobserved values. Standard missing data methods that assume MCAR or MAR 
+yield biased estimates under MNAR.
+
+Addressing MNAR requires either:
+
+\textit{Modeling the missing data mechanism} explicitly, specifying how 
+missingness depends on unobserved values. This requires strong substantive 
+assumptions about the form of dependence, which cannot be fully tested from 
+data.
+
+\textit{Pattern-mixture models} stratify by missingness patterns and model 
+outcomes separately for each pattern, then combine results. This requires 
+enough data in each pattern.
+
+\textit{Sensitivity analysis} specifies a range of plausible MNAR mechanisms 
+and examines how conclusions change across this range. If conclusions are 
+robust, confidence increases. If conclusions are fragile, uncertainty must 
+be acknowledged.
+
+\textit{Design-based approaches} such as incentivizing response, minimizing 
+attrition, or collecting auxiliary data on non-respondents can reduce 
+missingness or make MAR more plausible.
+
+In practice, distinguishing MAR from MNAR is subtle. Whether missingness is 
+MAR depends on what variables are observed. Adding rich covariates can make 
+MAR more plausible by capturing factors driving missingness. However, we can 
+never be certain that all relevant predictors of missingness are observed.
+
+\subsubsection{Cognitive Bias and Judgment Error}
+
+Beyond systematic biases in data generation and sampling processes, cognitive biases threaten the 
+validity of research design, data interpretation, and theoretical inference. These biases stem from 
+inherent limitations of human cognition, affecting both researchers and research subjects, and are often
+ difficult to detect and correct. Unlike technical biases that can be reduced through improved measurement
+  instruments or sampling procedures, cognitive biases are rooted in fundamental mechanisms of
+   human information processing, making them more insidious and persistent.
+
+\textbf{Researcher cognitive biases} permeate all stages of the research process, from problem formulation 
+to result interpretation. Confirmation bias may be the most pervasive and harmful, manifesting as a 
+tendency to seek, interpret, and remember information that supports existing beliefs while ignoring or 
+discounting contradictory evidence. Researchers may selectively report results that support hypotheses, 
+interpret ambiguous findings in ways favorable to theory, over-cite consistent evidence in literature reviews, or design 
+tests biased toward specifications that confirm expectations. This is especially dangerous in exploratory analysis, 
+where researchers may "discover" patterns in data that actually represent the interpretation of random variation 
+as meaningful relationships. Preregistration of research designs and analysis plans can partially mitigate this problem, 
+but cannot completely eliminate interpretive flexibility~\cite{nosek2018preregistration}.
+
+Hindsight bias makes known outcomes appear inevitable or obvious in retrospect, thereby distorting assessments of theoretical 
+predictive power. Researchers may overestimate theory's explanatory power for historical events, underestimate alternative 
+possibilities that did not occur, mistake post-hoc rationalization for ex-ante prediction, or bias case selection 
+toward "typical" or "obvious" examples. This is particularly problematic in historical and case study research, because 
+knowledge of outcomes inevitably influences reconstruction of causal processes. Knowledge of results contaminates understanding 
+of processes, making what were originally open and uncertain historical junctures appear to have false determinacy in retrospect.
+
+Availability bias causes easily recalled or imagined information to be overweighted. Recent, vivid, or dramatic cases are 
+more salient in researcher minds, leading to excessive attention to unusual or extreme cases, systematic distortion of theoretical 
+scope, mistaken judgments about event frequency or typicality, and overreliance on familiar examples in theory construction. 
+This bias interacts with patterns of media attention, because widely reported events become more cognitively available even 
+when they are not statistically typical.
+
+Anchoring effects cause initial information to excessively influence subsequent judgments. Researchers' preliminary hypotheses may
+ anchor interpretive frameworks, early findings may inappropriately constrain later analysis, mainstream estimates in the literature
+  may anchor expectations for new research, and disciplinary paradigms may limit theoretical imagination. Even when researchers are
+   aware they should remain open, initial frameworks still exert subtle but persistent influence. This accumulates in iterative
+    research processes, as the framing of early studies shapes the questions posed by subsequent research.
+
+Publication bias is the systematic preference for publishing statistically significant, novel, or counterintuitive results rather
+ than null or replication findings. This creates distortions in the literature such that true effects are systematically overestimated, 
+ false positive results are overrepresented, important null findings are buried, and theories appear more supported than they 
+ actually are. Meta-analyses and systematic reviews attempt to detect and correct for publication bias, but this requires access 
+ to unpublished research, which is itself difficult~\cite{rosenthal1979file}. The rise of preregistration and registered reports
+  attempts to combat publication bias by evaluating research designs before data collection, but adoption of these 
+  practices remains limited.
+
+\textbf{Research subject cognitive biases} systematically affect the data we collect, because research subjects are not passive
+ data sources but active agents with cognitive limitations and motivations. Social desirability bias causes people to present themselves
+  in socially acceptable ways, underreporting stigmatized behaviors in surveys such as drug use, prejudice, and illegal activities, 
+  while overreporting approved behaviors such as voting, charitable giving, and healthy habits. The magnitude of this bias depends 
+  on topic sensitivity, survey mode (e.g., face-to-face interviews produce more social desirability bias than anonymous online surveys), 
+  and cultural norms. Even when researchers guarantee anonymity, respondents' self-presentation motivations still distort responses.
+
+Recall bias stems from the reconstructive nature of memory. People do not accurately retrieve stored memories but rather reconstruct
+ past experiences during recall, a process influenced by current knowledge, beliefs, and emotions. Recall of past attitudes, 
+ behaviors, or event timing may be systematically inaccurate, particularly when asking about the distant past or mundane details. 
+ Retrospective reports of health behaviors, income history, or political attitudes may reflect projection of current states onto the past
+  more than actual history. This is particularly problematic in longitudinal research, where retrospective data may create spurious patterns
+   of stability or change.
+
+Framing effects demonstrate that different presentations of identical information lead to different judgments. Survey question wording, 
+option ordering, and contextual cues all systematically influence responses. Describing a policy as having a 
+"90\% success rate" versus a 
+"10\% failure rate" elicits different evaluations, even though the information content is identical.
+ Listing options as defaults dramatically increases selection rates. Question order creates context effects, as earlier
+  questions activate particular frames of consideration. These effects are not merely noise but reveal the malleability and 
+  context-dependence of attitudes and preferences, which is itself theoretically important but complicates measurement.
+
+The peak-end rule and duration neglect indicate that people's retrospective evaluations of experiences are disproportionately 
+influenced by peak intensity and ending moments while relatively neglecting duration. Reports of life satisfaction, work experiences, or 
+policy evaluations may be systematically biased toward intense or recent moments rather than overall or average experience. This 
+complicates research on well-being or satisfaction based on retrospective evaluations.
+
+\textbf{Biases in theory selection and interpretation} extend beyond individual researcher cognitive limitations to involve collective
+ patterns of disciplinary communities. Theoretical lock-in occurs when dominant paradigms become so entrenched that anomalous
+  phenomena are forced into existing frameworks rather than motivating theoretical revision. This relates to Kuhn's concept of 
+  normal science but involves more cognitive inertia than the constructive function of paradigms. It is easier for researchers
+   to work in familiar theoretical languages even when these theories face empirical challenges, creating a bias toward theoretical
+    conservatism.
+
+Overfitting is not only a technical statistical problem but also a cognitive bias. Researchers may construct overly complex models
+ or theories to fit quirks of particular data, mistaking noise for signal. This is especially dangerous when there
+  are many potential variables and flexible functional forms. The resulting theory or model performs excellently on original data but fails
+   to generalize because it captures sample-specific randomness rather than robust patterns. Cross-validation and out-of-sample 
+   testing can detect statistical overfitting, but theoretical overfitting is more insidious.
+
+Narrative fallacy is the tendency to construct coherent stories to explain events even when these events may be driven primarily
+ by random or incoherent factors. The human mind seeks patterns and causal narratives even in highly stochastic or multiply determined 
+ processes. This causes researchers to impose false coherence, ignoring contingency, path dependence, and multiple
+  possibilities. Case studies are particularly susceptible to this, as detailed narratives naturally suggest causal coherence. 
+  Quantitative research maintains more explicit vigilance against randomness through significance testing, but interpretation may
+   still fall prey to narrative fallacy.
+
+\textbf{Mitigating cognitive bias} requires institutional and methodological safeguards, as individual self-correction is insufficient.
+ Simply being aware of biases is not enough to overcome them. Research shows that even experts remain susceptible to known biases. 
+ Effective strategies include 
+ (1) preregistering research designs and analysis plans to reduce confirmation bias in exploratory
+  analysis, 
+  (2) blinding procedures that make data coding, outcome assessment, or case selection independent of outcome knowledge,
+  (3) adversarial collaborations where researchers holding different theoretical positions jointly design tests, with each side monitoring 
+  the other's potential biases,
+  (4) replication studies and meta-analyses that systematically synthesize multiple studies to detect publication 
+  bias and small sample biases,
+  (5) diverse research teams, as different backgrounds and perspectives can partially offset shared blind 
+  spots, and (6) epistemic humility that acknowledges all knowledge claims are affected by cognitive limitations.
+
+However, these strategies can only partially mitigate rather than eliminate cognitive biases. 
+Some biases such as social desirability bias or framing effects are inherently difficult to completely avoid because they reflect
+ the agency of research subjects and the context-dependence of attitudes. Other biases such as theoretical lock-in involve dynamics
+  at the level of disciplinary communities, beyond the scope of individual research designs. Recognizing the persistence of cognitive bias is important.
+  It reminds us that knowledge production is not merely a technical process but a profoundly human activity, shaped by our 
+  cognitive architecture and social embeddedness. This requires appropriate tentativeness about research findings and openness
+   to alternative interpretations and theories.
+
+\subsubsection{Attrition and Nonresponse}
+
+Specific types of missingness with particular theoretical importance are 
+\textbf{attrition} in longitudinal studies and \textbf{nonresponse} in surveys.
+
+\textbf{Longitudinal attrition} occurs when participants drop out of panel 
+studies or repeated measurements. Individuals move, lose interest, become too 
+burdened by participation, experience outcomes that prevent continuation, or 
+die. Organizations merge, dissolve, or stop reporting. Countries change data 
+collection practices or experience political disruptions.
+
+Attrition threatens both internal and external validity. If attrition is 
+systematic rather than random, remaining samples become progressively more 
+selected and unrepresentative. This is particularly problematic because 
+attrition often relates to outcomes. In health studies, sicker patients may 
+drop out. In education studies, struggling students may leave programs. In 
+economic surveys, financially stressed households may stop responding.
+
+Differential attrition across treatment and control groups particularly 
+threatens causal inference. If treated individuals drop out more (or less) 
+than controls, observed treatment effects confound actual effects with 
+selection effects from attrition. Analyzing complete cases essentially 
+restricts to a selected subpopulation that may respond differently to 
+treatment.
+
+Addressing attrition requires:
+
+\textit{Retention efforts} during data collection minimize attrition through 
+incentives, maintaining engagement, reducing burden, and tracking participants.
+
+\textit{Attrition analysis} examines differences between those who remain and 
+those who exit on baseline characteristics, assessing whether attrition is 
+MCAR, MAR, or MNAR.
+
+\textit{Statistical corrections} apply when attrition is MAR, using inverse 
+probability weighting, multiple imputation, or selection models conditional 
+on observables.
+
+\textit{Bounding} places best-case and worst-case limits on possible treatment 
+effects under different assumptions about attriters' outcomes~\cite{manski1989anatomy}.
+
+\textit{Intent-to-treat analysis} analyzes all randomized participants 
+regardless of treatment completion or attrition, preserving randomization 
+but conflating compliance with attrition.
+
+\textbf{Survey nonresponse} occurs when sampled individuals or units do not 
+participate in surveys. Unit nonresponse means entire cases are missing. 
+Item nonresponse means participants skip specific questions.
+
+Nonresponse has increased dramatically in recent decades across many contexts, 
+with telephone survey response rates often below 20\% in the US. This creates 
+serious concerns about representativeness even when sampling is carefully 
+designed~\cite{groves2008nonresponse}.
+
+Nonresponse creates bias if respondents differ systematically from 
+non-respondents on variables of interest. Evidence suggests they often do: 
+respondents tend to be more educated, older, more politically engaged, more 
+trusting, and more socially connected. This means surveys may systematically 
+misrepresent population opinions and behaviors.
+
+Addressing nonresponse requires:
+
+\textit{Response rate improvement} through contacts, incentives, assurances, 
+and reducing burden, though even intensive efforts often achieve only modest 
+rates.
+
+\textit{Post-stratification weighting} adjusts for known demographic differences 
+between samples and populations, though this assumes nonresponse conditional 
+on demographics is random.
+
+\textit{Calibration to auxiliary data} such as census benchmarks for demographic 
+distributions or administrative data for certain behaviors.
+
+\textit{Model-based adjustments} explicitly model response propensities and 
+weight inversely proportional to estimated propensities.
+
+\textit{Nonresponse follow-up} interviews intensive subsamples of initial 
+non-respondents, enabling characterization of nonresponse bias and statistical 
+correction.
+
+The fundamental challenge is that representativeness cannot be assumed from 
+low response rates, and corrections require assumptions about nonresponse 
+mechanisms. When response rates are very low, uncertainty about 
+representativeness may be large regardless of statistical adjustments.
+
+\subsubsection{Structural Data Quality Issues}
+
+Beyond missing data and selection, broader structural issues affect data 
+quality:
+
+\textbf{Measurement invariance across groups or times} is required for valid 
+comparison but often fails. If the same measure means different things to 
+different populations, or changes meaning over time, comparisons are 
+compromised.
+
+Survey questions may be interpreted differently across cultural contexts. 
+"Trust in government" may evoke different concepts in different political 
+systems. "Satisfaction with democracy" means different things to those living 
+under different regime types. Economic categories like "employment" or 
+"poverty" are defined differently across countries and time periods.
+
+Testing measurement invariance involves examining whether factor structures, 
+item loadings, and measurement parameters are equivalent across groups. When 
+invariance fails, either measures must be adapted to establish equivalence 
+or comparisons must be qualified.
+
+\textbf{Historical discontinuities in data collection} create artificial breaks 
+in time series. Administrative categories change as institutional practices 
+evolve. Survey question wording is revised. Sampling frames are updated. 
+Classification schemes are refined. Each creates potential discontinuities 
+that can masquerade as substantive changes.
+
+For example, crime statistics may jump not because crime increased but because 
+reporting practices changed. Economic data may show breaks when statistical 
+methodologies are revised. Education statistics may change with new 
+classification systems.
+
+Addressing this requires careful documentation of methodological changes, 
+adjustment of historical data where possible, and acknowledgment of 
+uncertainty around discontinuities.
+
+\textbf{Administrative data fitness for research} is often limited. Administrative 
+datasets are collected for bureaucratic purposes—taxation, program administration, 
+service delivery—not research. This creates systematic issues:
+
+\textit{Coverage gaps:} Only interactions with the administrative system are 
+recorded. Those who don't file taxes, don't apply for programs, or don't 
+use services are invisible.
+
+\textit{Incentive-driven reporting:} Entities may strategically misreport to 
+administrative systems to gain benefits or avoid penalties. Compliance 
+reporting, tax filings, and program evaluations involve strategic behavior.
+
+\textit{Category constraints:} Administrative categories serve bureaucratic 
+needs, not analytical ones. Research concepts may not align with administrative 
+classifications.
+
+\textit{Missing variables:} Information not required for administration is not 
+collected, even if theoretically relevant for research.
+
+\textit{Quality control variability:} Administrative data quality varies with 
+resources, training, and organizational capacity. Poorer or less capable 
+administrators may produce worse data.
+
+Using administrative data requires understanding these limitations and 
+assessing whether they compromise research validity.
+
+\textbf{Digital data quality issues} are increasingly important as social 
+science incorporates digital trace data from online platforms, sensors, and 
+connected devices:
+
+\textit{Algorithmic filtering:} Social media feeds, search results, and 
+recommendations are filtered algorithmically, meaning observed content is 
+not representative of all content but reflects opaque platform algorithms.
+
+\textit{Platform changes:} APIs, data access policies, and platform features 
+change frequently, creating discontinuities and limiting reproducibility.
+
+\textit{Bot and fraud contamination:} Automated accounts, fake users, and 
+coordinated manipulation campaigns create data that appear to be organic human 
+activity but are not.
+
+\textit{Demographics and digital divides:} Platform users are not representative 
+of broader populations. Young, wealthy, urban, educated individuals are 
+overrepresented. This creates selection bias in digital trace data.
+
+\textit{Context collapse:} Online behavior may not reflect offline preferences 
+or behavior. Platform affordances shape what people do and say. Digital traces 
+are performances shaped by imagined audiences and platform norms.
+
+These issues require critical engagement with data provenance, careful 
+assessment of representativeness, and caution about generalizing from digital 
+to broader populations.

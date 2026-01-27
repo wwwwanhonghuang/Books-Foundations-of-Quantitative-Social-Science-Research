@@ -1,0 +1,118 @@
+\begin{figure}[htbp]
+\centering
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[
+    phasebox/.style={
+        rectangle,
+        minimum width=13.6cm,   % widened parent
+        minimum height=2.7cm,
+        draw=black,
+        thick,
+        fill=orange!10
+    },
+    phasetext/.style={
+        font=\large\bfseries,
+        align=center
+    },
+    subtask/.style={
+        rectangle,
+        minimum width=3.6cm,    % widened sub-box
+        minimum height=1.05cm,
+        align=center,
+        draw=black,
+        fill=blue!8,
+        font=\small
+    },
+    mainarrow/.style={thick, ->, >=Stealth},
+    feedback/.style={thick, ->, >=Stealth, dashed, blue!70, font=\scriptsize}
+]
+
+% ================= PHASE 1: Research Design =================
+\node[phasebox] (designbox) at (0,0) {};
+\node[phasetext] at (0,0.8) {Research Design Phase}; % Text at top of box
+
+\node[subtask] (design1) at (-4.6, -0.4) {Conceptualization\\\& Theory Building};
+\node[subtask] (design2) at (0,    -0.4) {Operationalization\\\& Measurement Design};
+\node[subtask] (design3) at ( 4.6, -0.4) {Methodology Selection\\\& Scheme Finalization};
+
+\draw[mainarrow] (design1.east) -- (design2.west);
+\draw[mainarrow] (design2.east) -- (design3.west);
+
+% ================= PHASE 2: Data Collection =================
+\node[phasebox] (collectbox) at (0,-3.6) {};
+\node[phasetext] at (0,-2.8) {Data Collection Phase};
+
+\node[subtask] (collect1) at (-4.6, -4.0) {Sampling Design\\\& Strategy};
+\node[subtask] (collect2) at (0,    -4.0) {Data Source\\Identification \& Acquisition};
+\node[subtask] (collect3) at ( 4.6, -4.0) {Quality Control\\\& Protocol Standardization};
+
+\draw[mainarrow] (collect1.east) -- (collect2.west);
+\draw[mainarrow] (collect2.east) -- (collect3.west);
+
+% ================= PHASE 3: Data Processing =================
+\node[phasebox] (processbox) at (0,-7.2) {};
+\node[phasetext] at (0,-6.4) {Data Processing Phase};
+
+\node[subtask] (process1) at (-4.6, -7.6) {Data Cleaning\\\& Validation};
+\node[subtask] (process2) at (0,    -7.6) {Data Transformation\\\& Normalization};
+\node[subtask] (process3) at ( 4.6, -7.6) {Missing Data Handling\\\& Dataset Integration};
+
+\draw[mainarrow] (process1.east) -- (process2.west);
+\draw[mainarrow] (process2.east) -- (process3.west);
+
+% ================= PHASE 4: Analysis =================
+\node[phasebox] (analyzebox) at (0,-10.8) {};
+\node[phasetext] at (0,-10.0) {Analysis Phase};
+
+\node[subtask] (analyze1) at (-4.6, -11.2) {Exploratory\\Data Analysis};
+\node[subtask] (analyze2) at (0,    -11.2) {Statistical Testing\\\& Model Building};
+\node[subtask] (analyze3) at ( 4.6, -11.2) {Model Validation\\\& Interpretation};
+
+\draw[mainarrow] (analyze1.east) -- (analyze2.west);
+\draw[mainarrow] (analyze2.east) -- (analyze3.west);
+
+% ================= PHASE 5: Dissemination =================
+\node[phasebox] (disseminatebox) at (0,-14.4) {};
+\node[phasetext] at (0,-13.6) {Dissemination Phase};
+
+\node[subtask] (disseminate1) at (-4.6, -14.8) {Data Visualization\\\& Presentation};
+\node[subtask] (disseminate2) at (0,    -14.8) {Academic Writing\\\& Reporting};
+\node[subtask] (disseminate3) at ( 4.6, -14.8) {Reproducibility\\Documentation};
+
+\draw[mainarrow] (disseminate1.east) -- (disseminate2.west);
+\draw[mainarrow] (disseminate2.east) -- (disseminate3.west);
+
+% ================= Start and End =================
+\node[rectangle, minimum width=4.4cm, minimum height=1.2cm,
+      draw=black, fill=green!10, rounded corners, align=center]
+    (start) at (0, 2.6) {Research Initiation\\Define Research Question}; % Increased from 2.1 to 2.6
+
+\node[rectangle, minimum width=4.4cm, minimum height=1.2cm,
+      draw=black, fill=red!10, rounded corners, align=center]
+    (end) at (0, -16.8) {Research Completion /\\New Cycle Initiation}; % Decreased from -16.0 to -16.8
+
+% ================= Main Flow =================
+\draw[mainarrow] (start.south) -- (designbox.north);
+\draw[mainarrow] (designbox.south) -- (collectbox.north);
+\draw[mainarrow] (collectbox.south) -- (processbox.north);
+\draw[mainarrow] (processbox.south) -- (analyzebox.north);
+\draw[mainarrow] (analyzebox.south) -- (disseminatebox.north);
+\draw[mainarrow] (disseminatebox.south) -- (end.north);
+
+% ================= Feedback Loops =================
+\draw[feedback]
+    ([xshift=16pt]analyzebox.east) -- ++(2.0,0) |- ([xshift=16pt]designbox.east)
+    node[pos=0.25, right, align=left] {New insights\\trigger new research};
+
+\draw[feedback]
+    ([xshift=-16pt]processbox.west) -- ++(-2.0,0) |- ([xshift=-16pt]collectbox.west)
+    node[pos=0.25, left, align=right] {Data quality\\issues};
+
+\draw[feedback]
+    ([xshift=16pt]disseminatebox.east) -- ++(2.4,0) |- ([xshift=16pt]analyzebox.east)
+    node[pos=0.25, right, align=left] {Peer review\\feedback};
+
+\end{tikzpicture}}
+\caption{Quantitative Social Science Research Lifecycle and Iterative Workflow}
+\label{fig:research_workflow}
+\end{figure}

@@ -1,0 +1,94 @@
+\subsection{Functional Modules and Capabilities}
+
+The framework provides integrated support for research activities through eight functional modules organized into four categories: core research modules addressing fundamental 
+data operations, research support modules providing specialized tools, intelligent assistance augmenting researcher capabilities, and cross-cutting infrastructure enabling system-wide 
+properties.
+
+\subsubsection{Core Research Modules}
+
+Core research modules are designed to address fundamental operations that span multiple lifecycle stages and research schemes.
+
+The \textit{Data Collection \& Review} module is designed to provide systematic access to scholarly literature and research data across multiple sources. 
+For literature review and meta-analysis, the module aims to offer unified interfaces to academic databases including arXiv~\footnote{https://arxiv.org}, 
+PubMed~\footnote{https://pubmed.ncbi.nlm.nih.gov}, CrossRef~\footnote{https://www.crossref.org}, OSF~\footnote{https://osf.io}, SocArXiv~\footnote{https://osf.io/preprints/socarxiv}, 
+and Zenodo~\footnote{https://zenodo.org}. The design includes automated metadata extraction, bibliography management with deduplication, and structured storage conventions intended to 
+enable systematic reuse of collected materials. For secondary data analysis, the module is designed to provide explicit conventions for data ingestion from external sources and storage 
+in unified formats suitable for subsequent processing and analysis. Current implementation covers basic literature retrieval from major databases with metadata extraction, 
+while advanced features such as intelligent deduplication and cross-database query optimization remain under development.
+
+The \textit{Data Processing} module is designed to implement configurable transformation pipelines that handle data cleaning, validation, normalization, feature engineering, and 
+integration across sources. Processing pipelines are intended to be specified through contracts that define transformation sequences, validate intermediate outputs against schema 
+constraints, and maintain comprehensive provenance tracking linking processed data to raw inputs and transformation parameters. The modular processor architecture is designed to 
+allow researchers to compose custom pipelines from standard operations including missing data handling, outlier detection and treatment, variable recoding and transformation, 
+normalization and standardization, and feature construction. The design emphasizes preservation of audit trails documenting decisions and parameter choices, supporting sensitivity 
+analysis and methodological transparency. Current implementation provides limited transformation operations, with features such as advanced validation logic and automated 
+quality assessment planned for future development.
+
+The \textit{Data Analysis} module is designed to provide comprehensive statistical and computational methods spanning the diverse analytical approaches documented in 
+Section~\ref{sec:data-analysis-methods}. The module aims to organize methods into conceptually coherent categories while exposing them through consistent interfaces that abstract implementation details. 
+The design encompasses statistical inference methods including descriptive statistics, hypothesis testing, and various regression models; causal inference methods including propensity score 
+matching, instrumental variables, difference-in-differences, regression discontinuity designs, and synthetic control methods; machine learning methods for supervised and unsupervised 
+learning; and network analysis capabilities. All analytical procedures are designed to accept standardized input formats defined by contracts, produce structured output including effect estimates 
+and uncertainty quantification, and maintain execution metadata enabling result traceability. 
+Current implementation covers fundamental statistical methods including regression models and basic causal inference techniques, with machine learning and network analysis 
+capabilities under active development.
+
+The \textit{Data Visualization} module is designed to generate publication-ready figures and exploratory graphics supporting both analytical investigation and result presentation. 
+The design encompasses diverse visualization types including statistical plots, network visualizations, temporal visualizations, geospatial visualizations, and specialized visualizations 
+for text analysis. All visualizations are intended to integrate automatically with LaTeX for manuscript inclusion, follow customizable style templates aligned with publication standards, 
+and support both static high-resolution outputs and interactive exploration. Visualization specifications are designed to be definable in contracts, enabling automated figure regeneration 
+when underlying data or analyses change. 
+Current implementation provides core statistical plots and basic LaTeX integration, with interactive visualization capabilities and advanced customization options planned 
+for future releases.
+
+
+\subsubsection{Research Support Modules}
+
+Research support modules provide specialized capabilities for particular research activities.
+
+The \textit{Questionnaire Design} module supports primary data collection through structured survey instruments. 
+The module enables complex questionnaire definition with skip logic, validation rules, and response format specifications. Questionnaires are rendered using LaTeX for 
+professional presentation in print or PDF formats, ensuring typographic quality appropriate for academic research. The module maintains consistency between questionnaire definitions 
+and resulting data schemas, automatically generating data dictionaries and codebooks that document variable definitions, response options, and survey structure. 
+This integration ensures that collected data conform to expected formats and simplifies subsequent analysis by providing complete metadata.
+
+The \textit{LaTeX Code Generation} module automates production of publication-ready tables and figures from analytical results. The module translates structured analysis 
+outputs into LaTeX table environments following disciplinary formatting conventions such as APA or ASA styles, generates figure captions and references, and produces complete LaTeX 
+source files that integrate seamlessly with manuscript documents. Automated generation eliminates manual transcription of numerical results, reduces errors, ensures consistency 
+between computational outputs and manuscript presentation, and accelerates the transition from analysis completion to manuscript preparation. Templates allow customization 
+of formatting details while maintaining structural consistency.
+
+\subsubsection{Intelligent Assistance}
+
+The \textit{LLM Q\&A} module integrates large language models to augment researcher capabilities across multiple stages of the research lifecycle. During problem discovery, 
+the module facilitates interactive exploration of research questions, literature synthesis, and hypothesis generation through conversational interfaces. During data processing 
+and analysis, the module provides intelligent assistance for tasks such as data quality assessment, method selection guidance, and result interpretation. During dissemination, 
+the module assists with manuscript drafting, method description generation, and consistency checking. The module's integration with other framework components enables 
+context-aware assistance that leverages information from contracts, data schemas, and workflow specifications to provide relevant suggestions. Importantly, the module 
+functions as an augmentative tool that supports researcher judgment rather than replacing human decision-making, with all AI-generated suggestions requiring explicit 
+researcher validation before incorporation into research workflows.
+
+\subsubsection{Cross-Cutting Infrastructure}
+
+Cross-cutting infrastructure provides system-wide capabilities that span all functional modules and lifecycle stages.
+
+The \textit{Contract Definition} module serves as the foundational infrastructure supporting contract-driven design throughout the framework. This module provides mechanisms for 
+defining contracts in human-readable formats such as YAML or JSON, parsing and validating contract syntax, compiling contracts into executable validation rules, and enforcing contract 
+compliance during workflow execution. Contracts defined through this module are used to specify data schemas by defining data structures, data types, and constraint conditions. 
+They are also used to describe workflow specifications by defining operation sequences, dependency relationships, and associated parameters. In addition, contracts document analysis 
+configurations by recording method selection and parameter settings, define visualization templates by specifying figure types, stylistic conventions, and annotation information, and 
+prescribe output formats by determining how results are stored and presented. The module's validation engine continuously checks whether data and 
+operations satisfy contract requirements, enabling early detection of constraint violations and preventing the propagation of invalid states throughout the workflow.
+
+Provenance tracking infrastructure maintains comprehensive records of computational operations, data transformations, and analytical decisions throughout the research process. 
+For every operation, the system records code versions and commit identifiers, parameter configurations and random seeds, execution timestamps and computational environment 
+specifications including software versions and system configurations, and data lineage graphs showing how outputs derive from inputs through transformation sequences. 
+This provenance information serves multiple purposes: enabling exact reproduction of analytical results by documenting all factors affecting computation, supporting 
+sensitivity analysis by facilitating systematic parameter variation, providing audit trails for methodological transparency and peer review, and enabling debugging by 
+tracing errors to their sources in data or code. Provenance metadata is stored in structured formats alongside research outputs, ensuring that reproducibility information 
+remains accessible and machine-readable.
+
+Version control integration connects the framework with established version control systems such as Git~\footnote{https://git-scm.com}, enabling workflows to leverage 
+standard practices for code management, collaboration, and change tracking. The integration automatically commits workflow specifications, contracts, and analysis scripts 
+to version control repositories, tags analytical results with associated code versions, and generates reproducibility metadata linking outputs to exact code states. 
+This integration ensures that the complete computational environment supporting research findings remains documented and recoverable.

@@ -1,6 +1,19 @@
+# LaTeX auxiliary files
 *.aux
 *.bbl
 *.blg
 *.out
 *.toc
 *.log
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# PDFs (ignore all generated PDFs)
+*.pdf
+
+# Build directories (any depth)
+build/
+**/build/

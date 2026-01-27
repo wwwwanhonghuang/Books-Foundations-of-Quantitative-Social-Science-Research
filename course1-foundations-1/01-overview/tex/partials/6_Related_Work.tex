@@ -1,0 +1,108 @@
+\section{Related Work}
+\label{sec:related}
+
+This section situates the proposed framework within the broader landscape of research infrastructure for quantitative social science.  
+We organize the discussion around conceptual approaches to supporting research workflows, 
+presenting architectural patterns, design philosophies, and a summary of the reviewed systems.
+
+\subsection{Computational Environments for Statistical Analysis}
+
+Statistical computing environments represent the foundational infrastructure for quantitative social science research. 
+These environments can be characterized along several dimensions: (1) interaction paradigm such as command-line, graphical, and notebook-based, 
+(2) extensibility mechanisms, including package systems, plugins, scripting, among others, and (3) integration philosophy, for examples, monolithic vs. modular architectures.
+
+The R statistical environment exemplifies open-source, package-based extensibility~\cite{r_core_team2023}. Its architecture enables community contributions 
+through CRAN's extensive package ecosystem, facilitating rapid methodological innovation and diverse analytical capabilities. The R Markdown system extends this model to 
+reproducible document generation, integrating code, results, and narrative exposition~\cite{xie2018r}. However, this extensibility comes with trade-offs: 
+inconsistent package interfaces, limited quality control mechanisms, and steep learning curves for navigating the fragmented ecosystem.
+
+Commercial statistical packages such as SPSS, Stata, and SAS adopt different design philosophies emphasizing reliability, consistency, and institutional 
+support~\cite{pallant2020spss,kohler2012data}. These systems provide curated method libraries, standardized interfaces, and extensive 
+validation ensuring analytical correctness. The trade-off involves reduced flexibility, proprietary licensing models, and limited community-driven innovation compared to open ecosystems.
+
+Notebook-based environments including Jupyter represent a third architectural approach, prioritizing interactive exploration and 
+integrated documentation~\cite{kluyver2016jupyter}. By combining executable code, visualizations, and explanatory text in unified documents, notebooks support 
+iterative analysis and communication of computational processes. However, notebook architectures face challenges in version control, dependency management, and 
+scaling beyond single-analyst workflows.
+
+These computational environments primarily address the data analysis phase of research, with limited support for earlier stages such as literature review, 
+research design, and question formulation, or later stages including systematic result documentation and dissemination. Our framework aims at building upon these analytical 
+capabilities while extending infrastructure to encompass the complete research lifecycle.
+
+\subsection{Tools for Qualitative and Mixed-Methods Research}
+
+Qualitative data analysis software addresses research paradigms emphasizing interpretive understanding of textual, audio, and visual data. Tools such as NVivo, MAXQDA, 
+and Atlas.ti provide capabilities for systematic coding, thematic analysis, and conceptual network 
+visualization~\cite{jackson2018qualitative,kuckartz2019qualitative,friese2019qualitative}. These systems support rigorous qualitative inquiry through features including 
+hierarchical coding schemes, query mechanisms for pattern identification, and visualization of conceptual relationships.
+
+However, qualitative tools generally operate in isolation from quantitative analytical pipelines. Data, concepts, and findings developed in qualitative analysis rarely 
+flow systematically into quantitative investigations, and vice versa. This separation reflects deeper methodological tensions between interpretive 
+and positivist traditions, but it also stems from architectural limitations: incompatible data formats, distinct workflow paradigms, and 
+lack of integration mechanisms between qualitative and quantitative software ecosystems.
+
+Mixed-methods research, which explicitly aims to combine qualitative and quantitative approaches~\cite{creswell2017research}, often proceeds through manual 
+coordination between separate tools rather than integrated workflows. Researchers must export findings from qualitative software, manually transform and 
+integrate them with quantitative data structures, and synthesize results through prose narratives rather than computational infrastructure. Our framework 
+addresses these integration challenges through standardized data representation supporting multiple modalities and explicit workflow specifications 
+enabling systematic coordination between analytical traditions.
+
+\subsection{Specialized Platforms for Computational Social Science}
+
+Computational social science has motivated development of specialized platforms addressing particular analytical needs. Text analysis tools such as LIWC provide 
+dictionary-based quantification of linguistic and psychological dimensions in written text~\cite{pennebaker2015liwc}. Social media analytics platforms enable collection 
+and analysis of large-scale digital trace data~\cite{golder2014comparison,gruzd2016netlytic}. Network analysis packages implement graph-theoretic algorithms for 
+relational data~\cite{csardi2006igraph}.
+
+These specialized platforms demonstrate the value of domain-specific abstractions: tools designed around particular data types such as (1) text, networks, and social media streams, 
+or (2) analytical paradigms, including sentiment analysis, and community detection, 
+can provide more natural interfaces and efficient implementations than general-purpose systems. However, specialization creates integration challenges. Researchers 
+combining multiple computational methods—such as analyzing textual content and network structure of social media data—must coordinate across separate platforms with 
+incompatible data models and workflow assumptions.
+
+Our framework takes a different architectural approach: rather than specializing deeply in particular computational methods, we provide integration infrastructure 
+that accommodates diverse analytical approaches while maintaining interoperability. Researchers can incorporate specialized external tools through standardized 
+interfaces while benefiting from unified data management, workflow orchestration, and result documentation spanning multiple methods.
+
+\subsection{Workflow Management and Reproducibility Systems}
+
+Reproducibility has emerged as a central concern in computational research, motivating development of workflow management systems. These systems range from 
+general-purpose workflow engines such as Snakemake and Nextflow~\cite{koster2012snakemake,di2017nextflow} to domain-specific platforms such as Galaxy for 
+bioinformatics~\cite{afgan2018galaxy}.
+
+Workflow management systems address several reproducibility challenges: explicit dependency tracking between analytical steps, automated execution ensuring 
+consistency across runs, environment management capturing software versions and configurations, and workflow-as-code paradigms enabling version control 
+of analytical procedures. However, most workflow systems assume researchers have already formulated clear analytical plans ready for execution. They provide 
+limited support for exploratory phases where analytical approaches evolve iteratively, or for translating research questions and theoretical frameworks into computational specifications.
+
+Our framework's contract-driven design shares workflow management's emphasis on explicit specification and automated execution, but extends this approach to earlier 
+research phases. Contracts can be drafted informally during problem discovery and research design, capturing evolving understanding of data requirements and analytical 
+intentions. As research proceeds, contracts become more precise and executable, eventually driving automated workflow execution while maintaining continuity with 
+earlier conceptual specifications. This progressive formalization bridges exploratory and confirmatory research modes within a unified infrastructure.
+
+\subsection{Emerging AI-Augmented Research Tools}
+
+Recent developments in large language models have enabled new forms of research assistance. Tools such as Elicit, Semantic Scholar's AI features, and Connected 
+Papers leverage language models for literature search, information extraction, and research synthesis~\cite{lo2020s2orc}. These applications demonstrate AI's potential for 
+accelerating literature review, identifying relevant prior work, and extracting structured information from unstructured text.
+
+However, current AI research tools focus narrowly on literature-related tasks without extending to subsequent research phases. They operate as standalone 
+applications rather than integrated components of research workflows, requiring manual transfer of information to downstream activities. Additionally, general-purpose AI assistants lack grounding in disciplinary knowledge, methodological norms, and theoretical frameworks specific to quantitative social science, limiting their ability to provide contextually appropriate guidance.
+
+Our framework is expected to incorporates LLM capabilities as components within broader research infrastructure rather than isolated applications. AI assistance for 
+literature review connects directly to research design, suggesting operationalizations based on reviewed measurement approaches. AI-supported analysis 
+interpretation draws on statistical knowledge and methodological principles rather than treating results as disconnected numerical outputs. This integration 
+enables AI to augment researcher capabilities systematically across the research lifecycle rather than addressing fragmented tasks.
+
+
+\subsection{Summary}
+
+The reviewed systems collectively address distinct aspects of quantitative social science research infrastructure. Statistical 
+computing environments provide analytical capabilities but focus primarily on the analysis phase. Qualitative tools support interpretive 
+inquiry but remain isolated from quantitative workflows. Specialized computational platforms offer powerful domain-specific capabilities but 
+create integration challenges. Workflow management systems enforce reproducibility for predefined procedures but provide limited support for exploratory 
+research. AI-augmented tools demonstrate potential for intelligent assistance but currently address narrow task scopes.
+
+This landscape reveals both substantial progress in research infrastructure and persistent gaps in lifecycle integration, methodological interoperability, 
+abstraction levels, intelligent assistance, and reproducibility support. The following sections describe our architectural approach to addressing these challenges through 
+integrated infrastructure spanning the research lifecycle.

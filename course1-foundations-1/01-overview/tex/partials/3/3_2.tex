@@ -1,0 +1,65 @@
+
+\subsection{Architectural Overview}
+
+The framework adopts a three-layer architecture that separates conceptual research structure, functional interfaces, and computational implementations. 
+This separation promotes loose coupling, extensibility, and adaptability across diverse research contexts while maintaining coherent support for the complete research lifecycle.
+
+\subsubsection{Three-Layer Architecture}
+
+At the highest level, the \textit{Research Workflow Layer} functions as a conceptual layer representing the progression of research across different lifecycle stages. 
+This layer provides an explicit structural representation of research stages, including problem discovery,
+research design, data collection, data processing, data analysis, and dissemination.
+It also captures the logical relationships among these stages.
+The workflow layer serves as an organizing framework that guides how functional capabilities are composed to support particular research schemes.
+
+The \textit{Functional API Layer} exposes high-level functions corresponding to common research activities at each lifecycle stage. These functions provide researcher-facing 
+interfaces that abstract underlying computational complexity while offering sufficient configurability for diverse methodological approaches. 
+Functions in this layer are defined by their inputs, outputs, and semantic behaviors rather than by specific implementations, enabling alternative 
+implementations to satisfy the same functional contract. This abstraction allows the framework to accommodate methodological evolution without disrupting established workflows.
+
+The \textit{Infrastructure Module Layer} contains modular computational components that provide the underlying operational support for functional APIs. 
+Modules in this layer implement specific capabilities such as data retrieval from academic databases, statistical analysis procedures, visualization 
+generation, or document processing. Modules communicate through well-defined interfaces specifying data formats and operational contracts, enabling independent 
+development, testing, and substitution. The modular architecture facilitates extensibility: new modules can be integrated by conforming to interface specifications, and 
+existing modules can be replaced with alternative implementations without affecting other system components.
+
+Figure~\ref{fig:system-architecture} illustrates the relationships among these three layers and shows how research lifecycle stages map to functional capabilities supported 
+by infrastructure modules.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{images/arch.pdf}
+    \caption{Three-layer architecture of the quantitative social science research framework. The Research Workflow Layer conceptually represents the six lifecycle stages. The 
+    Functional API Layer provides high-level research functions. The Infrastructure Module Layer implements modular computational components. Red arrows illustrate primary mappings between 
+    lifecycle stages and functional capabilities, though stages may utilize multiple functions as research needs dictate.}
+    \label{fig:system-architecture}
+\end{figure}
+
+\subsubsection{Contract-Driven Design Philosophy}
+
+A distinguishing feature of this architecture is its contract-driven design, which formalizes research specifications as explicit, validatable, machine-readable contracts. 
+This design philosophy addresses fundamental challenges in research reproducibility and workflow automation.
+
+Contracts in this framework serve multiple interrelated purposes. First, they function as \textit{formal specifications} that document data structure expectations, variable 
+definitions, transformation sequences, analysis parameters, and output format requirements. 
+In contrast to informal documentation or implicit assumptions embedded in code, contracts provide explicit, checkable statements about what data should look 
+like and how operations should behave. 
+Second, contracts enable \textit{automated validation and verification} throughout the research process. As data flow through processing pipelines and analytical procedures, 
+the framework continuously validates that data structures, value ranges, and semantic constraints specified in contracts are satisfied, detecting errors early and preventing 
+invalid operations. Third, contracts support \textit{code generation and automation} by providing machine-readable specifications that drive automated production of boilerplate 
+code, data transformation pipelines, and output formatting routines. Fourth, contracts serve as \textit{machine-readable research protocol documentation} that captures methodological 
+decisions in forms that both humans and computational systems can interpret, bridging the gap between prose method descriptions and executable workflows.
+
+The notion of contracts draws conceptual inspiration from database integrity constraints, which specify conditions that data must satisfy to maintain consistency and validity. Just as 
+database constraints prevent invalid data insertion and ensure referential integrity, research workflow contracts prevent incompatible data operations and ensure that transformations 
+preserve required properties. However, contracts in this framework extend beyond data constraints to encompass workflow specifications, analytical parameters, and output requirements, 
+providing comprehensive formalization of the research process.
+
+Importantly, contracts are implementation-agnostic regarding their representational format. While the current framework employs YAML and JSON for human-readable contract specification, 
+the conceptual role of contracts in defining explicit, validatable specifications is independent of particular syntax or serialization format. Contracts could equally 
+be expressed in XML, TOML, custom domain-specific languages, or even structured text files, provided they support formal specification of constraints and enable automated 
+validation. The essential characteristic is not the notation but the semantic function: formalizing research specifications as explicit contracts that guide execution and enable verification.
+
+By embedding contracts throughout the research workflow, the framework transforms methodological transparency and reproducibility from aspirational goals requiring separate 
+documentation efforts into structural properties enforced by the system architecture. Research specifications become executable documentation that directly drives computational 
+operations while remaining human-readable and version-controllable.

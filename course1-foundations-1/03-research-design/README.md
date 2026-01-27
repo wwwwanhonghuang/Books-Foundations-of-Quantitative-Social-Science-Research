@@ -1,4 +1,9 @@
-Excellent! Research design is crucial. Let's break down what needs to be covered:
+[] Add the discussion of research scheme, (国际政治学概论 5ed. p19)
+
+Excellent
+
+
+! Research design is crucial. Let's break down what needs to be covered:
 
 **Phase 1: From Concepts to Operationalization**
 
